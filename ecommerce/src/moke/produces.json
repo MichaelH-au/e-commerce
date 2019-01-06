@@ -1,0 +1,12 @@
+{
+  "status":"0",
+  "msg":"",
+  "result":[
+    {
+      "productId":"1",
+      "productName":"mobile",
+      "productPrice":"2499",
+      "productImage":"1.jpg"
+    }
+  ]
+}
