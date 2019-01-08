@@ -44,12 +44,12 @@ sequelize
 
 // console.log(sequelize)
 // if model change, uncomment the follow code
-sequelize.sync({alter: true,
-    logging:true}).then( status => {
-    if (status) console.log(status.models);
-
-
-}).catch(error => console.log(error));
+// sequelize.sync({alter: true,
+//     logging:true}).then( status => {
+//     if (status) console.log(status.models);
+//
+//
+// }).catch(error => console.log(error));
 
 
 // --- READING and IMPORTING all MODELS  ---- //

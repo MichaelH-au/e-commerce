@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header/Header'
 import NavBread from './components/NavBread/NavBread'
+import Home from './containers/Home/Home'
 
 class App extends Component {
   render() {
@@ -8,7 +9,7 @@ class App extends Component {
       <div>
           <Header/>
           <NavBread/>
-          <h1>hello world</h1>
+          <Home/>
       </div>
     );
   }
