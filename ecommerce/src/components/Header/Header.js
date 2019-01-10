@@ -4,7 +4,7 @@ class Header extends Component {
     render() {
         return (
             <div>
-                <div className="row align-items-center navBar" >
+                <div className="row align-items-center navBar m-0" >
                     <div className="col-1 mainIcon text-center">
                         Home
                     </div>

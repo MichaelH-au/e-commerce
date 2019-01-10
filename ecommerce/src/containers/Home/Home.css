@@ -16,5 +16,10 @@
 }
 
 .active{
-    color:red
+    color:red;
+    border-left: 5px solid lightblue;
+    padding-left: 5px;
+    transition: .5s;
+    display: block;
+    font-weight: bold;
 }
