@@ -6,11 +6,11 @@ var models = require('../models')
 router.get('/', function(req, res, next) {
     let limit = parseInt(req.query.limit);
     let offset = parseInt(req.query.offset)
+    console.log('load')
     models.product.findAll({
         offset:offset,
         limit:limit
     }).then(values =>{
-        console.log(values[0].dataValues)
         res.json({status:0, msg:'', result:values})
     })
 })

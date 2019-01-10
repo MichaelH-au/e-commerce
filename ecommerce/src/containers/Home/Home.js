@@ -24,7 +24,8 @@ class Home extends Component {
             selectedPriceRange:'all',
             itemOffset:8,
             loadFinish:false,
-            test:0
+            test:0,
+            itemLoading:false
         }
     }
     componentWillUnmount() {
@@ -41,20 +42,36 @@ class Home extends Component {
     }
     handleScroll(e) {
         let bottomHeight = document.documentElement.scrollHeight - document.documentElement.scrollTop - window.innerHeight
-        if (bottomHeight < 100 && !this.state.loadFinish) {
-            axios.get('http://localhost:1337/api/products', {params:{offset:this.state.itemOffset,limit:8}})
+        this.setState({
+            test:bottomHeight
+        })
+        if (bottomHeight < 100 && !this.state.loadFinish && !this.state.itemLoading) {
+            this.setState({
+                itemLoading:true
+            })
+            axios.get('http://localhost:1337/api/products', {params:{offset:this.state.itemOffset,limit:4}})
                 .then(res => {
                     if (res.data.result.length < 4) {
-                        this.setState({
-                            loadFinish:true,
-                            productList:this.state.productList.push(...res.data.result)
-                        })
+                        if (res.data.result.length > 0){
+                            this.setState({
+                                loadFinish:true,
+                                productList:this.state.productList.push(...res.data.result),
+                                itemLoading:false
+                            })
+                        } else {
+                            this.setState({
+                                loadFinish:true,
+                                itemLoading:false
+                            })
+
+                        }
                     } else {
                         let list = this.state.productList;
                         list.push(...res.data.result);
                         this.setState({
                             itemOffset:this.state.itemOffset + 4,
-                            productList:list
+                            productList:list,
+                            itemLoading:false
                         })
                     }
                 })
@@ -67,10 +84,44 @@ class Home extends Component {
             [key]:value
         })
     }
+    sortChange(e){
+        if (e.target.value === 'Highest') {
+            let list = this.state.productList;
+            list = list.sort(function(a, b) {
+                var x = parseInt(a.productPrice);
+                var y = parseInt(b.productPrice);
+                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+            });
+            this.setState({
+                productList:list
+            })
+        } else if (e.target.value === 'Lowest') {
+            let list = this.state.productList;
+            list = list.sort(function(a, b) {
+                var x = parseInt(a.productPrice);
+                var y = parseInt(b.productPrice);
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });
+            this.setState({
+                productList:list
+            })
+
+        }
+    }
     render() {
         return (
             <div className='home'>
                 <div className='container-fluid '>
+                    <div className='row justify-content-end'>
+                        <div className='col-2'>
+                            <span>sort </span>
+                            <select name="sord" onChange={(v)=>this.sortChange(v)}>
+                                <option value="">Null</option>
+                                <option value="Highest">Highest</option>
+                                <option value="Lowest">Lowest</option>
+                            </select>
+                        </div>
+                    </div>
                     <div className='row'>
                         <div className='col-2 pl-2'>
                             <p>Price</p>
@@ -100,8 +151,9 @@ class Home extends Component {
                                     </div>
                                 ))}
                             </div>
+                            {this.state.loadFinish ? <h1>No more items</h1> : null}
                         </div>
-                        <h1>{this.state.test}</h1>
+
                     </div>
                 </div>
             </div>
