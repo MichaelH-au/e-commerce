@@ -18,14 +18,14 @@ class Home extends Component {
                 },
                 {
                     startPrice:'1000',
-                    endPrice:'2000'
+                    endPrice:'5000'
                 },
             ],
             selectedPriceRange:'all',
             itemOffset:8,
             loadFinish:false,
             test:0,
-            itemLoading:false
+            itemLoading:false,
         }
     }
     componentWillUnmount() {
@@ -63,7 +63,6 @@ class Home extends Component {
                                 loadFinish:true,
                                 itemLoading:false
                             })
-
                         }
                     } else {
                         let list = this.state.productList;
@@ -83,6 +82,12 @@ class Home extends Component {
         this.setState({
             [key]:value
         })
+        axios.get('http://localhost:1337/api/products', {params:{offset:0,limit:8,selectedRange:value}})
+            .then(res => {
+                this.setState({
+                    productList:res.data.result
+                })
+            })
     }
     sortChange(e){
         if (e.target.value === 'Highest') {
