@@ -32,7 +32,7 @@ class Home extends Component {
         window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
     componentDidMount() {
-        axios.get('http://localhost:1337/api/products', {params:{offset:0,limit:8}})
+        axios.get('http://localhost:1337/api/products', {params:{offset:0,limit:8,selectedRange:this.state.selectedPriceRange}})
             .then(res => {
                 this.setState({
                     productList:res.data.result
@@ -45,16 +45,17 @@ class Home extends Component {
         this.setState({
             test:bottomHeight
         })
+        console.log(this.state.itemLoading, this.state.loadFinish)
         if (bottomHeight < 100 && !this.state.loadFinish && !this.state.itemLoading) {
             this.setState({
                 itemLoading:true
             })
-            axios.get('http://localhost:1337/api/products', {params:{offset:this.state.itemOffset,limit:4}})
+            axios.get('http://localhost:1337/api/products', {params:{offset:this.state.itemOffset,limit:4,selectedRange:this.state.selectedPriceRange},})
                 .then(res => {
                     if (res.data.result.length < 4) {
                         if (res.data.result.length > 0){
                             this.setState({
-                                loadFinish:true,
+                                loadFinish:false,
                                 productList:this.state.productList.push(...res.data.result),
                                 itemLoading:false
                             })
@@ -156,6 +157,7 @@ class Home extends Component {
                                     </div>
                                 ))}
                             </div>
+                            {/*<h1>{this.state.test}</h1>*/}
                             {this.state.loadFinish ? <h1>No more items</h1> : null}
                         </div>
 

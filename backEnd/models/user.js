@@ -3,9 +3,7 @@ module.exports = function (sequelize, dataType) {
         userName: {
             type: dataType.STRING,
             allowNull: false,
-            validate: {
-                unique: true
-            }
+            unique: true
         },
         Password: {
             type: dataType.STRING,

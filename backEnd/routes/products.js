@@ -37,8 +37,6 @@ router.get('/', function(req, res, next) {
             }
         }
     }
-    console.log(param)
-    console.log('load')
     models.product.findAll(param).then(values =>{
         res.json({status:0, msg:'', result:values})
     })
