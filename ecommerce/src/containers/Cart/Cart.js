@@ -21,6 +21,19 @@ class Cart extends Component {
                 console.log(this.state.cartList)
             })
     }
+    countChange(index, value, product_id) {
+        if (value >= 0) {
+            let list = this.state.cartList;
+            list[index].carts.count = value
+            this.setState({
+                cartList:list
+            })
+            axios.post('/api/users/cart/update', {user_id:this.props.user.id, product_id, count:value})
+                .then(res => {
+                    console.log(res.data)
+                })
+        }
+    }
     render() {
         console.log(this.props.user)
         return (
@@ -43,7 +56,14 @@ class Cart extends Component {
 
                         </div>
                         <div className="col-2">{item.productPrice}</div>
-                        <div className="col-2">{item.carts.count}</div>
+                        <div className="col-2">
+                            <div className='row justify-content-center'>
+                                <button className='btn btn-secondary mr-2' onClick={()=>this.countChange(index,parseInt(item.carts.count) - 1, item.id)}>-</button>
+                                <input className='w-25 text-center mr-2' type="text" value={item.carts.count} onChange={(e)=>this.countChange(index,e.target.value, item.id)}/>
+                                <button className='btn btn-secondary' onClick={()=>this.countChange(index,parseInt(item.carts.count) + 1, item.id)}>+</button>
+
+                            </div>
+                        </div>
                         <div className="col-2">{parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
                         <div className="col-2">Edit</div>
                     </div>

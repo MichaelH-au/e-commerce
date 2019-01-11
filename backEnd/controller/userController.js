@@ -29,11 +29,11 @@ module.exports = {
                 userName: req.body.username,
                 Password: req.body.password
             },
-            include:{
-                model:models.product,
+            include: {
+                model: models.product,
                 attributes: [[models.sequelize.fn('COUNT', models.sequelize.col('productName')), 'items']],
-                through:{
-                    where:{status:'pending'}
+                through: {
+                    where: {status: 'pending'}
                 }
             }
         }).then(data => {
@@ -50,24 +50,39 @@ module.exports = {
         })
 
     },
-    getCartItems(req, res){
+    getCartItems(req, res) {
         console.log(req.query)
         models.user.findOne({
-            where:{
-                id:req.query.user_id
+            where: {
+                id: req.query.user_id
             },
-            include:{
-                model:models.product,
-                attributes: ['productName', 'imagePath', 'productPrice'],
-                through:{
-                    where:{status:'pending'}
+            include: {
+                model: models.product,
+                attributes: ['id', 'productName', 'imagePath', 'productPrice'],
+                through: {
+                    where: {status: 'pending'}
                 }
             }
-        }).then(value =>{
+        }).then(value => {
             console.log(value)
-            res.json({data:value.products})
-        }).catch(error =>{
+            res.json({data: value.products})
+        }).catch(error => {
             console.log(error)
+            res.json({error})
+        })
+    },
+    updateCart(req, res) {
+        models.carts.update(
+            {count:req.body.count},
+            {
+                where:{
+                    user_id:req.body.user_id,
+                    product_id:req.body.product_id
+                }
+            }
+        ).then(value =>{
+            res.json({status:'success'})
+        }).catch(error => {
             res.json({error})
         })
     }

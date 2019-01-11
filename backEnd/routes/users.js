@@ -14,8 +14,11 @@ router.post('/login', function(req, res, next) {
     userController.login(req,res)
 })
 
-
 router.get('/cart', function(req, res, next) {
     userController.getCartItems(req, res)
+})
+
+router.post('/cart/update', function(req, res, next) {
+    userController.updateCart(req,res)
 })
 module.exports = router;

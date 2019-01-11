@@ -44,7 +44,6 @@ class Home extends Component {
     }
     handleScroll(e) {
         let bottomHeight = document.documentElement.scrollHeight - document.documentElement.scrollTop - window.innerHeight
-        console.log(this.state.itemLoading, this.state.loadFinish)
         if (bottomHeight < 100 && !this.state.loadFinish && !this.state.itemLoading) {
             this.setState({
                 itemLoading:true
