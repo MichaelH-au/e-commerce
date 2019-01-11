@@ -8,21 +8,26 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Header from "./components/Header/Header";
 import NavBread from "./components/NavBread/NavBread";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import { Provider } from 'react-redux'
+import store from './store'
 import Home from "./containers/Home/Home";
 import Register from "./containers/user/Register";
+import Login from "./containers/user/Login";
 
 ReactDOM.render(
-    <BrowserRouter>
-        <div>
-            <Header/>
-            {/*<NavBread/>*/}
-        <Switch>
-            <Route path='/' exact component={Home}></Route>
-            <Route path='/register' exact component={Register}></Route>
-            <Route path='/login' exact component={Register}></Route>
-        </Switch>
-        </div>
-    </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <div>
+                <Header/>
+                {/*<NavBread/>*/}
+                <Switch>
+                    <Route path='/' exact component={Home}></Route>
+                    <Route path='/register' exact component={Register}></Route>
+                    <Route path='/login' exact component={Login}></Route>
+                </Switch>
+            </div>
+        </BrowserRouter>
+    </Provider>
     , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

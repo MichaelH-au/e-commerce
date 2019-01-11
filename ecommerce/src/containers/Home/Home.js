@@ -32,7 +32,7 @@ class Home extends Component {
         window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
     componentDidMount() {
-        axios.get('http://localhost:1337/api/products', {params:{offset:0,limit:8,selectedRange:this.state.selectedPriceRange}})
+        axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:this.state.selectedPriceRange}})
             .then(res => {
                 this.setState({
                     productList:res.data.result
@@ -50,7 +50,7 @@ class Home extends Component {
             this.setState({
                 itemLoading:true
             })
-            axios.get('http://localhost:1337/api/products', {params:{offset:this.state.itemOffset,limit:4,selectedRange:this.state.selectedPriceRange},})
+            axios.get('/api/products', {params:{offset:this.state.itemOffset,limit:4,selectedRange:this.state.selectedPriceRange},})
                 .then(res => {
                     if (res.data.result.length < 4) {
                         if (res.data.result.length > 0){
@@ -83,7 +83,7 @@ class Home extends Component {
         this.setState({
             [key]:value
         })
-        axios.get('http://localhost:1337/api/products', {params:{offset:0,limit:8,selectedRange:value}})
+        axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:value}})
             .then(res => {
                 this.setState({
                     productList:res.data.result

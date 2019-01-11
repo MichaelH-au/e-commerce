@@ -10,4 +10,7 @@ router.post('/register', function(req, res, next) {
     userController.create_user(req,res)
 })
 
+router.post('/login', function(req, res, next) {
+    userController.login(req,res)
+})
 module.exports = router;

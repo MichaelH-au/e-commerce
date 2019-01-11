@@ -30,7 +30,7 @@ class Register extends Component {
 
 
         // this.props.userCreate({username, password, role, gender, address, email, linkedin, birthday, phone})
-        axios.post('http://localhost:1337/api/users/register', {username, password, role, gender, address, email, birthday, phone})
+        axios.post('/api/users/register', {username, password, role, gender, address, email, birthday, phone})
             .then(res=>{
                 if (res.status == 200) {
                     //success

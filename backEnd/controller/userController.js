@@ -23,4 +23,23 @@ module.exports = {
             res.json({error: reason});
         });
     },
+    login(req, res) {
+        models.user.find({
+            where: {
+                userName: req.body.username,
+                Password: req.body.password
+            }
+        }).then(data => {
+            if (data) {
+                //TODO cookie
+                // res.cookie('userId', data.dataValues.id)
+                res.json({data: data})
+            } else {
+                res.json({error: 'invalid username or password'})
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+
+    },
 }
