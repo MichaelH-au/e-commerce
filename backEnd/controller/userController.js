@@ -28,8 +28,13 @@ module.exports = {
             where: {
                 userName: req.body.username,
                 Password: req.body.password
+            },
+            include:{
+                model:models.product,
+                attributes: [[models.sequelize.fn('COUNT', models.sequelize.col('productName')), 'items']],
             }
         }).then(data => {
+            console.log(data.products)
             if (data) {
                 //TODO cookie
                 // res.cookie('userId', data.dataValues.id)

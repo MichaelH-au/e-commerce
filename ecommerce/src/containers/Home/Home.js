@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { addToCart } from "../user/store/actions";
 import './Home.css'
 
 class Home extends Component {
@@ -24,7 +26,6 @@ class Home extends Component {
             selectedPriceRange:'all',
             itemOffset:8,
             loadFinish:false,
-            test:0,
             itemLoading:false,
         }
     }
@@ -39,12 +40,10 @@ class Home extends Component {
                 })
             })
         window.addEventListener('scroll', this.handleScroll.bind(this));
+        console.log(this.props.user)
     }
     handleScroll(e) {
         let bottomHeight = document.documentElement.scrollHeight - document.documentElement.scrollTop - window.innerHeight
-        this.setState({
-            test:bottomHeight
-        })
         console.log(this.state.itemLoading, this.state.loadFinish)
         if (bottomHeight < 100 && !this.state.loadFinish && !this.state.itemLoading) {
             this.setState({
@@ -114,6 +113,16 @@ class Home extends Component {
 
         }
     }
+
+    addToCart(id){
+        let user_id =this.props.user.id;
+        let product_id = id;
+        this.props.addToCart(user_id, product_id)
+        // axios.post('/api/products/addCart', {user_id,product_id,count:1})
+        //     .then(res => {
+        //         console.log(res)
+        //     })
+    }
     render() {
         return (
             <div className='home'>
@@ -152,7 +161,7 @@ class Home extends Component {
                                         <div className='card-footer'>
                                             <p>Name: {item.productName}</p>
                                             <p>Price: {item.productPrice}</p>
-                                            <button className='btn btn-outline-info w-100'>Add to cart</button>
+                                            <button className='btn btn-outline-info w-100' onClick={()=> this.props.user.isAuth ? this.addToCart(item.id) : this.props.history.push('login')}>Add to cart</button>
                                         </div>
                                     </div>
                                 ))}
@@ -160,12 +169,14 @@ class Home extends Component {
                             {/*<h1>{this.state.test}</h1>*/}
                             {this.state.loadFinish ? <h1>No more items</h1> : null}
                         </div>
-
                     </div>
                 </div>
             </div>
         );
     }
 }
-
-export default Home;
+const mapStateToProps = state => ({
+    user:state.user
+})
+const actionCreators = { addToCart }
+export default connect(mapStateToProps, actionCreators)(Home)

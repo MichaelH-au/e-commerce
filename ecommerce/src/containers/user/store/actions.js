@@ -2,9 +2,14 @@ import axios from 'axios'
 import { LOGIN_SUCCESS } from "./constants";
 import { LOGOUT } from "./constants";
 import { ERROR_MSG } from "./constants";
+import { ADD_TO_CART } from "./constants";
 
 function loginSuccess(data) {
     return {type:LOGIN_SUCCESS, payload:data}
+}
+
+function addToCartSuccess() {
+    return {type:ADD_TO_CART}
 }
 
 function errorMsg(msg) {
@@ -18,10 +23,25 @@ export function userLogin(username, password) {
             .then(res=>{
                 if (res.status == 200 && res.data.data) {
                     //success
-                    console.log(res.data.data)
                     dispatch(loginSuccess(res.data.data))
-                    console.log('req success')
                 } else {
+                    dispatch(errorMsg(res.data.error))
+                }
+            })
+    }
+}
+
+export function addToCart(user_id,product_id) {
+    return dispatch => {
+        axios.post('/api/products/addCart', {user_id,product_id,count:1})
+            .then(res => {
+                console.log(res)
+                if (res.status == 200 && res.data.succ) {
+                    //success
+                    console.log('add to cart')
+                    dispatch(addToCartSuccess())
+                } else {
+                    console.log('faile')
                     dispatch(errorMsg(res.data.error))
                 }
             })

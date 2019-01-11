@@ -10,3 +10,19 @@
 .login{
     line-height: 50px;
 }
+.cart{
+    height: 20px;
+    width: 20px;
+    position: relative;
+}
+.itemCounter{
+    background-color: gray;
+    border-radius: 15px;
+    color: black;
+    text-align: center;
+    position: absolute;
+    width: 25px;
+    top: -5px;
+    left:10px;
+    font-size: 12px;
+}
