@@ -17,15 +17,16 @@ const defaultState = {
 export default (state = defaultState, action) => {
     switch (action.type) {
         case LOGIN_SUCCESS:
+            console.log(action.data)
             return {
                 ...state,
                 ...action.payload,
+                itemInCart:parseInt(action.payload.products[0].items),
                 isAuth: true,
                 errorMsg: ''
             }
         case ADD_TO_CART:
-            console.log(state)
-            return {...state, itemInCart: state.itemInCart + 1}
+            return {...state, itemInCart: state.itemInCart + action.data}
         case LOGOUT:
             return {...defaultState}
         default:

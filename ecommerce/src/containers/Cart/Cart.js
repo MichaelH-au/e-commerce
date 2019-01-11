@@ -48,6 +48,14 @@ class Cart extends Component {
                         <div className="col-2">Edit</div>
                     </div>
                 ))}
+                <div className='row text-center mt-5 bg-info text-white align-items-center'>
+                    <div className="col-6 ">Select All</div>
+                    <div className="col-2">Total: </div>
+                    <div className="col-2">{this.state.cartList.reduce((sum,item)=>{
+                        return sum + parseInt(item.carts.count) * parseInt(item.productPrice)
+                    }, 0)}</div>
+                    <button className="col-2 btn btn-danger">CheckOut</button>
+                </div>
             </div>
         );
     }

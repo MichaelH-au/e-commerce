@@ -20,7 +20,7 @@ class Header extends Component {
                                 <Link to={'cart'}>
                                     <div className='cart mr-4'>
                                         <img className='cart' src={require('../../images/Header/cart.png')}/>
-                                        <div className='itemCounter p-0'>{this.props.user.products[0].items}</div>
+                                        <div className='itemCounter p-0'>{this.props.user.itemInCart}</div>
                                     </div>
                                 </Link>
                                 <div className='mr-5' onClick={this.props.logout}>Logout</div>

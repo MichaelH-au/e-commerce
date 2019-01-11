@@ -10,6 +10,7 @@ module.exports = function (sequelize, dataType) {
         },
         count: {
             type: dataType.STRING,
+            defaultValue:1,
             allowNull: false
         },
         status: {

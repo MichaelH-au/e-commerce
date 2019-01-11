@@ -57,9 +57,12 @@ module.exports = {
                             product_id: req.body.product_id,
                         }
                     }
-                )
+                ).then(value=>{
+                    res.json({succ:'update'})
+                })
+            } else {
+                res.json({succ:'new'})
             }
-            res.send({succ:'yes'})
         }).catch(error => {
             console.log(error)
             res.send({error:error})

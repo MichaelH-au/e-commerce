@@ -8,8 +8,8 @@ function loginSuccess(data) {
     return {type:LOGIN_SUCCESS, payload:data}
 }
 
-function addToCartSuccess() {
-    return {type:ADD_TO_CART}
+function addToCartSuccess(data) {
+    return {type:ADD_TO_CART,data}
 }
 
 function errorMsg(msg) {
@@ -36,11 +36,14 @@ export function addToCart(user_id,product_id) {
         axios.post('/api/products/addCart', {user_id,product_id,count:1})
             .then(res => {
                 console.log(res)
-                if (res.status == 200 && res.data.succ) {
+                if (res.status == 200 && res.data.succ =='update') {
                     //success
                     console.log('add to cart')
-                    dispatch(addToCartSuccess())
-                } else {
+                    dispatch(addToCartSuccess(0))
+                } else if (res.status == 200 && res.data.succ =='new'){
+                    dispatch(addToCartSuccess(1))
+                }
+                else {
                     console.log('faile')
                     dispatch(errorMsg(res.data.error))
                 }
