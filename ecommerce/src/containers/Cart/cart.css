@@ -1,0 +1,8 @@
+.cartItemImage{
+    height: 50px;
+    width: 50px;
+}
+.cartItemList{
+    background-color: white;
+    color: black;
+}

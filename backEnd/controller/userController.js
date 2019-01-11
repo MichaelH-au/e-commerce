@@ -32,9 +32,12 @@ module.exports = {
             include:{
                 model:models.product,
                 attributes: [[models.sequelize.fn('COUNT', models.sequelize.col('productName')), 'items']],
+                through:{
+                    where:{status:'pending'}
+                }
             }
         }).then(data => {
-            console.log(data.products)
+            // console.log(data.products)
             if (data) {
                 //TODO cookie
                 // res.cookie('userId', data.dataValues.id)
@@ -47,4 +50,25 @@ module.exports = {
         })
 
     },
+    getCartItems(req, res){
+        console.log(req.query)
+        models.user.findOne({
+            where:{
+                id:req.query.user_id
+            },
+            include:{
+                model:models.product,
+                attributes: ['productName', 'imagePath', 'productPrice'],
+                through:{
+                    where:{status:'pending'}
+                }
+            }
+        }).then(value =>{
+            console.log(value)
+            res.json({data:value.products})
+        }).catch(error =>{
+            console.log(error)
+            res.json({error})
+        })
+    }
 }
