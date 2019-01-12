@@ -11,14 +11,26 @@ class Cart extends Component {
         super(props)
         this.state = {
             cartList: [],
-            selectAll:false
+            selectAll:true,
+            checkoutCounter:0
         }
     }
     componentDidMount(){
         axios.get('/api/users/cart', {params:{user_id:this.props.user.id}})
             .then(res => {
+                let counter = 0;
+                let selectAll = true
+                res.data.data.forEach(item => {
+                    if (item.carts.status === 'checked'){
+                        counter++;
+                    } else {
+                        selectAll = false
+                    }
+                })
                 this.setState({
-                    cartList: res.data.data
+                    cartList: res.data.data,
+                    checkoutCounter:counter,
+                    selectAll
                 })
                 console.log(this.state.cartList)
             })
@@ -39,8 +51,10 @@ class Cart extends Component {
     checkboxHandler(index, value, product_id){
         let list = this.state.cartList;
         list[index].carts.status = value;
+        let counter = value === 'checked' ? 1 : -1
         this.setState({
-            cartList:list
+            cartList:list,
+            checkoutCounter:this.state.checkoutCounter + counter
         })
         axios.post('/api/users/cart/update', {user_id:this.props.user.id, product_id, status:value})
             .then(res => {
@@ -53,21 +67,25 @@ class Cart extends Component {
         let list = this.state.cartList
         list.splice(index,1)
         this.setState({
-            cartList:list
+            cartList:list,
+            checkoutCounter:this.state.checkoutCounter - 1
         })
     }
     selectAll(){
+
         let list = this.state.cartList;
         list.forEach(item =>{
             item.carts.status = this.state.selectAll ? 'pending' : 'checked'
         })
+        let count = this.state.selectAll ? 0 :this.state.cartList.length
         axios.post('/api/users/cart/selectAll', {user_id:this.props.user.id, selectAll:!this.state.selectAll})
             .then(res => {
                 console.log(res.data)
             })
         this.setState({
             cartList:list,
-            selectAll:!this.state.selectAll
+            selectAll:!this.state.selectAll,
+            checkoutCounter: count
         })
     }
     render() {
@@ -122,7 +140,7 @@ class Cart extends Component {
                         return sum + parseInt(item.carts.count) * parseInt(item.productPrice)
                         return sum
                     }, 0)}</div>
-                    <button className="col-2 btn btn-danger">CheckOut</button>
+                    <button className="col-2 btn btn-danger" disabled={!this.state.checkoutCounter}>CheckOut</button>
                 </div>
             </div>
         );
