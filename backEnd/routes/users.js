@@ -34,6 +34,9 @@ router.get('/address', function(req, res, next) {
     userController.getAddress(req, res)
 })
 
+router.post('/address/setDefault', function(req, res, next) {
+    userController.setDefaultAddress(req,res)
+})
 
 router.post('/address/delete', function(req, res, next) {
     userController.deleteAddress(req,res)

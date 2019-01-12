@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import './Address.css'
 import axios from "axios";
@@ -17,10 +17,17 @@ class Address extends Component {
         axios.get('/api/users/address', {params:{user_id:this.props.user.id}})
             .then(res => {
                 console.log(res.data)
-                this.setState({
-                    addressList:res.data.data
+                let selectedIndex = null;
+                res.data.data.forEach(item=>{
+                    if (item.isDefault) {
+                        selectedIndex = item.id;
+                        return false;
+                    }
                 })
-                console.log(res.data.data)
+                this.setState({
+                    addressList:res.data.data,
+                    selectedAddress:selectedIndex
+                })
             })
     }
     handleChange(key, value){
@@ -71,9 +78,9 @@ class Address extends Component {
                 <div className="checkout-title ml-5">
                     <h2><span>Shipping address</span></h2>
                 </div>
-                <div className='row'>
+                <div className='row w-100'>
                     {this.state.addressList.map((item, index) =>(
-                        <div className={`addressBox text-left flex-column pl-4 ${this.state.selectedAddress === index ? 'activeBorder' : ''}`} onClick={()=>this.handleChange('selectedAddress',index)} key={index}>
+                        <div className={`addressBox text-left flex-column pl-4 ${this.state.selectedAddress === item.id ? 'activeBorder' : ''}`} onClick={()=>this.handleChange('selectedAddress',item.id)} key={index}>
                             <div className='mt-2 greyColor'>{item.contactName}</div>
                             <div className='mt-2 greyColor'>{item.address}</div>
                             <div className='mt-2 greyColor'>{item.postCode}</div>
@@ -92,6 +99,20 @@ class Address extends Component {
                             <img className='addAddressIcon mt-5' src={require("../../images/Address/plus-o.png")} alt=""/>
                         </div>
                         <div className='mt-3 greyColor '>Add new address</div>
+                    </div>
+                </div>
+                <div className='row justify-content-between w-100 p-0 mt-5'>
+                    <div className='col-2 ml-5'>
+                        <Link to='/cart'>
+                            <button className='btn btn-outline-success'>Previous</button>
+                        </Link>
+                    </div>
+                    <div className='col-2 mr-5 mt-3'>
+                        <Link to={{pathname:'/orderconfirm',
+                            state:{address_id:this.state.selectedAddress}
+                        }}>
+                            <button className='btn btn-danger w-100'>Next</button>
+                        </Link>
                     </div>
                 </div>
             </div>

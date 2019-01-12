@@ -52,6 +52,10 @@ module.exports = {
     },
     getCartItems(req, res) {
         console.log(req.query)
+        let param = {}
+        if (req.query.status == 'checked'){
+            param.where = {status:'checked'}
+        }
         models.user.findOne({
             where: {
                 id: req.query.user_id
@@ -59,9 +63,7 @@ module.exports = {
             include: {
                 model: models.product,
                 attributes: ['id', 'productName', 'imagePath', 'productPrice'],
-                // through: {
-                //     where: {status: 'pending'}
-                // }
+                through: param
             }
         }).then(value => {
             console.log(value)
@@ -156,6 +158,7 @@ module.exports = {
             res.json({error})
             return
         }
+        console.log(req.body)
         try{
             await models.address.update({
                 isDefault :1

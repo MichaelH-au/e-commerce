@@ -93,7 +93,7 @@ class Cart extends Component {
         return (
             <div>
                 {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
-                <div className='row text-center mt-5 bg-info text-white'>
+                <div className='row text-center mt-5 bg-info text-white w-100'>
                     <div className="col-4">Items</div>
                     <div className="col-2">Price</div>
                     <div className="col-2">Quantity</div>
@@ -101,7 +101,7 @@ class Cart extends Component {
                     <div className="col-2">Edit</div>
                 </div>
                 {this.state.cartList.map((item, index) =>(
-                    <div className='row text-center pt-4 cartItemList' key={index}>
+                    <div className='row text-center pt-4 cartItemList w-100' key={index}>
                         <div className="col-4">
                             <div className='row justify-content-start align-items-center'>
                                 {item.carts.status === 'pending' ?
@@ -126,7 +126,7 @@ class Cart extends Component {
                         <div className="col-2" onClick={()=>this.deleteItem(item.id, index)}><img className='deleteIcon' src={require('../../images/Cart/trash.png')} alt=""/></div>
                     </div>
                 ))}
-                <div className='row text-center mt-5 bg-info text-white align-items-center'>
+                <div className='row text-center mt-5 bg-info text-white align-items-center w-100 p-0'>
                     <div className="col-6 ">
                         {!this.state.selectAll ?
                             <img className='checkBox border-dark' onClick={() => this.selectAll()}  src={require('../../images/Cart/check-box-blank.png')} alt=""/> :
