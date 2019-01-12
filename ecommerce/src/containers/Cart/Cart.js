@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import axios from "axios";
+import { deleteFromCart } from "../user/store/actions";
 import './cart.css'
 
 class Cart extends Component {
@@ -34,6 +35,15 @@ class Cart extends Component {
                 })
         }
     }
+    deleteItem(product_id, index){
+        console.log(product_id)
+        this.props.deleteFromCart(this.props.user.id,product_id)
+        let list = this.state.cartList
+        list.splice(index,1)
+        this.setState({
+            cartList:list
+        })
+    }
     render() {
         console.log(this.props.user)
         return (
@@ -65,7 +75,7 @@ class Cart extends Component {
                             </div>
                         </div>
                         <div className="col-2">{parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
-                        <div className="col-2">Edit</div>
+                        <div className="col-2" onClick={()=>this.deleteItem(item.id, index)}><img className='deleteIcon' src={require('../../images/Cart/trash.png')} alt=""/></div>
                     </div>
                 ))}
                 <div className='row text-center mt-5 bg-info text-white align-items-center'>
@@ -86,7 +96,8 @@ function mapStateToProps(state) {
         user:state.user
     };
 }
-
+const actionCreator = { deleteFromCart }
 export default connect(
     mapStateToProps,
+    actionCreator
 )(Cart);

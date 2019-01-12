@@ -85,5 +85,17 @@ module.exports = {
         }).catch(error => {
             res.json({error})
         })
+    },
+    deleteCartItem(req, res){
+        models.carts.destroy({
+            where: {
+                user_id: req.body.user_id,
+                product_id: req.body.product_id
+            }
+        }).then(value =>{
+            res.json({status:'success'})
+        }).catch(error => {
+            res.json({error})
+        })
     }
 }

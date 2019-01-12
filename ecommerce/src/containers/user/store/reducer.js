@@ -1,6 +1,7 @@
 import { LOGIN_SUCCESS } from "./constants";
 import { LOGOUT } from "./constants";
 import { ADD_TO_CART } from "./constants";
+import { DELETE_CART_ITEM } from "./constants";
 
 const defaultState = {
     isAuth:false,
@@ -27,6 +28,8 @@ export default (state = defaultState, action) => {
             }
         case ADD_TO_CART:
             return {...state, itemInCart: state.itemInCart + action.data}
+        case DELETE_CART_ITEM:
+            return {...state, itemInCart: state.itemInCart - 1}
         case LOGOUT:
             return {...defaultState}
         default:

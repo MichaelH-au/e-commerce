@@ -21,4 +21,8 @@ router.get('/cart', function(req, res, next) {
 router.post('/cart/update', function(req, res, next) {
     userController.updateCart(req,res)
 })
+
+router.post('/cart/delete', function(req, res, next) {
+    userController.deleteCartItem(req,res)
+})
 module.exports = router;
