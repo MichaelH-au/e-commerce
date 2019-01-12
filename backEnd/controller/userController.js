@@ -142,5 +142,32 @@ module.exports = {
             console.log(error)
             res.json({error})
         })
+    },
+    async setDefaultAddress(req, res) {
+        try{
+            await models.address.update({
+                isDefault :0
+            },{
+                where:{
+                    userInfo:req.body.user_id
+                }
+            })
+        }catch(error){
+            res.json({error})
+            return
+        }
+        try{
+            await models.address.update({
+                isDefault :1
+            },{
+                where:{
+                    id:req.body.address_id
+                }
+            })
+        }catch(error){
+            res.json({error})
+            return
+        }
+        res.json({status:'succ'})
     }
 }

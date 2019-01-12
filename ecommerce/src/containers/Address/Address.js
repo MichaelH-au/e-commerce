@@ -28,6 +28,21 @@ class Address extends Component {
             [key]:value
         })
     }
+    setDefaultAddress(address_id){
+        axios.post('/api/users/address/setDefault', {address_id,user_id:this.props.user.id})
+            .then(res => {
+                console.log(res.data)
+                console.log(res.data.data)
+            })
+        let list = this.state.addressList;
+        list.forEach((item)=>{
+            if(item.isDefault && item.id != address_id) {
+                item.isDefault = 0
+            } else if (item.id == address_id) {
+                item.isDefault = 1
+            }
+        })
+    }
     render() {
         return (
             <div>
@@ -53,7 +68,7 @@ class Address extends Component {
                             <div className="row justify-content-around mt-2">
                                 {item.isDefault ?
                                     <div className='text-warning'>default address</div> :
-                                    <div className='text-warning'>set address</div>
+                                    <div className='text-warning' onClick={()=>this.setDefaultAddress(item.id)}>set address</div>
                                 }
                                 <img className='deleteIcon' src={require("../../images/Cart/trash.png")} alt=""/>
                             </div>

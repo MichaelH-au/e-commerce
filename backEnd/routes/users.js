@@ -33,4 +33,9 @@ router.post('/cart/selectAll', function(req, res, next) {
 router.get('/address', function(req, res, next) {
     userController.getAddress(req, res)
 })
+
+
+router.post('/address/setDefault', function(req, res, next) {
+    userController.setDefaultAddress(req,res)
+})
 module.exports = router;
