@@ -23,7 +23,7 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 ...action.payload,
-                itemInCart:parseInt(action.payload.products[0].items ? action.payload.products[0].items:0),
+                itemInCart:parseInt(action.payload.products[0] ? action.payload.products[0].items:0),
                 isAuth: true,
                 errorMsg: ''
             }
