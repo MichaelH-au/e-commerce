@@ -29,4 +29,8 @@ router.post('/cart/delete', function(req, res, next) {
 router.post('/cart/selectAll', function(req, res, next) {
     userController.selectAllCartItem(req,res)
 })
+
+router.get('/address', function(req, res, next) {
+    userController.getAddress(req, res)
+})
 module.exports = router;

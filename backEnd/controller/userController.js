@@ -119,5 +119,28 @@ module.exports = {
         }).catch(error => {
             res.json({error})
         })
+    },
+    getAddress(req, res) {
+        console.log(req.query)
+        models.user.findOne({
+            where: {
+                id: req.query.user_id
+            },
+            attributes: ['id'],
+            include: {
+                model: models.address,
+                as:'userInfo',
+                // attributes: [],
+                // through: {
+                //     where: {status: 'pending'}
+                // }
+            }
+        }).then(value => {
+            console.log(value.userInfo[0])
+            res.json({data: value.userInfo})
+        }).catch(error => {
+            console.log(error)
+            res.json({error})
+        })
     }
 }

@@ -38,6 +38,7 @@ module.exports = function (sequelize, dataType) {
     });
     User.associate = (models) => {
         User.belongsToMany(models.product, {through: 'carts'});
+        User.hasMany(models.address, {as: 'userInfo', foreignKey: 'userInfo'});
     }
     return User;
 };

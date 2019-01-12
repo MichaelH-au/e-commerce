@@ -14,6 +14,7 @@ import Home from "./containers/Home/Home";
 import Register from "./containers/user/Register";
 import Login from "./containers/user/Login";
 import Cart from './containers/Cart/Cart'
+import Address from './containers/Address/Address'
 
 ReactDOM.render(
     <Provider store={store}>
@@ -26,6 +27,7 @@ ReactDOM.render(
                     <Route path='/register' exact component={Register}></Route>
                     <Route path='/login' exact component={Login}></Route>
                     <Route path='/cart' exact component={Cart}></Route>
+                    <Route path='/address' exact component={Address}></Route>
                 </Switch>
             </div>
         </BrowserRouter>

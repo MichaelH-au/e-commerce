@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import axios from "axios";
 import { deleteFromCart } from "../user/store/actions";
 import './cart.css'
@@ -140,7 +140,10 @@ class Cart extends Component {
                         return sum + parseInt(item.carts.count) * parseInt(item.productPrice)
                         return sum
                     }, 0)}</div>
-                    <button className="col-2 btn btn-danger" disabled={!this.state.checkoutCounter}>CheckOut</button>
+
+                    <button className={this.state.checkoutCounter ? "col-2 btn btn-danger text-white" :"col-2 btn btn-secondary text-white"} disabled={!this.state.checkoutCounter}>
+                        <Link to='/address'>Checkout</Link>
+                    </button>
                 </div>
             </div>
         );
