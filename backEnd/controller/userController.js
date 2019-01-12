@@ -32,9 +32,9 @@ module.exports = {
             include: {
                 model: models.product,
                 attributes: [[models.sequelize.fn('COUNT', models.sequelize.col('productName')), 'items']],
-                through: {
-                    where: {status: 'pending'}
-                }
+                // through: {
+                //     where: {status: 'pending'}
+                // }
             }
         }).then(data => {
             // console.log(data.products)
@@ -59,9 +59,9 @@ module.exports = {
             include: {
                 model: models.product,
                 attributes: ['id', 'productName', 'imagePath', 'productPrice'],
-                through: {
-                    where: {status: 'pending'}
-                }
+                // through: {
+                //     where: {status: 'pending'}
+                // }
             }
         }).then(value => {
             console.log(value)
@@ -72,8 +72,15 @@ module.exports = {
         })
     },
     updateCart(req, res) {
+        let param = {};
+        if (req.body.count) {
+            param.count=req.body.count;
+        }
+        if (req.body.status) {
+            param.status=req.body.status;
+        }
         models.carts.update(
-            {count:req.body.count},
+            param,
             {
                 where:{
                     user_id:req.body.user_id,
@@ -93,6 +100,21 @@ module.exports = {
                 product_id: req.body.product_id
             }
         }).then(value =>{
+            res.json({status:'success'})
+        }).catch(error => {
+            res.json({error})
+        })
+    },
+    selectAllCartItem(req,res){
+
+        models.carts.update(
+            {status:req.body.selectAll?'checked':'pending'},
+            {
+                where:{
+                    user_id:req.body.user_id,
+                }
+            }
+        ).then(value =>{
             res.json({status:'success'})
         }).catch(error => {
             res.json({error})

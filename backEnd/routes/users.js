@@ -25,4 +25,8 @@ router.post('/cart/update', function(req, res, next) {
 router.post('/cart/delete', function(req, res, next) {
     userController.deleteCartItem(req,res)
 })
+
+router.post('/cart/selectAll', function(req, res, next) {
+    userController.selectAllCartItem(req,res)
+})
 module.exports = router;

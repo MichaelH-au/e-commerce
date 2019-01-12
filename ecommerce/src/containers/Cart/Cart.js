@@ -10,7 +10,8 @@ class Cart extends Component {
     constructor(props){
         super(props)
         this.state = {
-            cartList: []
+            cartList: [],
+            selectAll:false
         }
     }
     componentDidMount(){
@@ -35,6 +36,17 @@ class Cart extends Component {
                 })
         }
     }
+    checkboxHandler(index, value, product_id){
+        let list = this.state.cartList;
+        list[index].carts.status = value;
+        this.setState({
+            cartList:list
+        })
+        axios.post('/api/users/cart/update', {user_id:this.props.user.id, product_id, status:value})
+            .then(res => {
+                console.log(res.data)
+            })
+    }
     deleteItem(product_id, index){
         console.log(product_id)
         this.props.deleteFromCart(this.props.user.id,product_id)
@@ -42,6 +54,20 @@ class Cart extends Component {
         list.splice(index,1)
         this.setState({
             cartList:list
+        })
+    }
+    selectAll(){
+        let list = this.state.cartList;
+        list.forEach(item =>{
+            item.carts.status = this.state.selectAll ? 'pending' : 'checked'
+        })
+        axios.post('/api/users/cart/selectAll', {user_id:this.props.user.id, selectAll:!this.state.selectAll})
+            .then(res => {
+                console.log(res.data)
+            })
+        this.setState({
+            cartList:list,
+            selectAll:!this.state.selectAll
         })
     }
     render() {
@@ -59,7 +85,11 @@ class Cart extends Component {
                 {this.state.cartList.map((item, index) =>(
                     <div className='row text-center pt-4 cartItemList' key={index}>
                         <div className="col-4">
-                            <div className='row justify-content-center align-items-center'>
+                            <div className='row justify-content-start align-items-center'>
+                                {item.carts.status === 'pending' ?
+                                    <img className='checkBox' onClick={()=>this.checkboxHandler(index, 'checked', item.id)} src={require('../../images/Cart/check_box_outline_blank.png')} alt=""/> :
+                                    <img className='checkBox' onClick={()=>this.checkboxHandler(index, 'pending', item.id)} src={require('../../images/Cart/check_box.png')} alt=""/>
+                                }
                                 <img className='cartItemImage' src={item.imagePath} alt=""/>
                                 <div className='ml-2'>{item.productName}</div>
                             </div>
@@ -79,10 +109,18 @@ class Cart extends Component {
                     </div>
                 ))}
                 <div className='row text-center mt-5 bg-info text-white align-items-center'>
-                    <div className="col-6 ">Select All</div>
+                    <div className="col-6 ">
+                        {!this.state.selectAll ?
+                            <img className='checkBox border-dark' onClick={() => this.selectAll()}  src={require('../../images/Cart/check-box-blank.png')} alt=""/> :
+                            <img className='checkBox bg-white' onClick={() => this.selectAll()} src={require('../../images/Cart/check_box.png')} alt=""/>
+                        }
+                        Select All
+                    </div>
                     <div className="col-2">Total: </div>
                     <div className="col-2">{this.state.cartList.reduce((sum,item)=>{
+                        if (item.carts.status === 'checked')
                         return sum + parseInt(item.carts.count) * parseInt(item.productPrice)
+                        return sum
                     }, 0)}</div>
                     <button className="col-2 btn btn-danger">CheckOut</button>
                 </div>
