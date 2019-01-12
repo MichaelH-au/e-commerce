@@ -149,7 +149,7 @@ module.exports = {
                 isDefault :0
             },{
                 where:{
-                    userInfo:req.body.user_id
+                    userInfo:req.body.user_id,
                 }
             })
         }catch(error){
@@ -161,7 +161,8 @@ module.exports = {
                 isDefault :1
             },{
                 where:{
-                    id:req.body.address_id
+                    id:req.body.address_id,
+                    userInfo:req.body.user_id
                 }
             })
         }catch(error){
@@ -169,5 +170,13 @@ module.exports = {
             return
         }
         res.json({status:'succ'})
+    },
+    deleteAddress(req, res){
+        models.address.destroy({
+            where:{
+                id:req.body.address_id,
+                userInfo:req.body.user_id
+            }
+        })
     }
 }

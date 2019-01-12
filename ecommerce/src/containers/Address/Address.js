@@ -43,6 +43,19 @@ class Address extends Component {
             }
         })
     }
+    deleteAddress(address_id, index){
+        axios.post('/api/users/address/delete', {address_id,user_id:this.props.user.id})
+            .then(res => {
+                console.log(res.data)
+                console.log(res.data.data)
+            })
+        let list = this.state.addressList;
+        list.splice(index,1)
+        this.setState({
+            addressList:list
+        })
+
+    }
     render() {
         return (
             <div>
@@ -70,7 +83,7 @@ class Address extends Component {
                                     <div className='text-warning'>default address</div> :
                                     <div className='text-warning' onClick={()=>this.setDefaultAddress(item.id)}>set address</div>
                                 }
-                                <img className='deleteIcon' src={require("../../images/Cart/trash.png")} alt=""/>
+                                <img className='deleteIcon' onClick={()=>this.deleteAddress(item.id, index)} src={require("../../images/Cart/trash.png")} alt=""/>
                             </div>
                         </div>
                     ))}
