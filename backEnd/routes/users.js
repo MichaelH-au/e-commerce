@@ -41,4 +41,9 @@ router.post('/address/setDefault', function(req, res, next) {
 router.post('/address/delete', function(req, res, next) {
     userController.deleteAddress(req,res)
 })
+
+
+router.post('/order/create', function(req, res, next) {
+    userController.createOrder(req,res)
+})
 module.exports = router;

@@ -4,6 +4,7 @@ import { LOGOUT } from "./constants";
 import { ERROR_MSG } from "./constants";
 import { ADD_TO_CART } from "./constants";
 import { DELETE_CART_ITEM } from "./constants";
+import { CREATE_ORDER } from "./constants";
 
 function loginSuccess(data) {
     return {type:LOGIN_SUCCESS, payload:data}
@@ -16,6 +17,10 @@ function addToCartSuccess(data) {
 
 function deleteFromCartSuccess() {
     return {type:DELETE_CART_ITEM}
+}
+
+function createOrderSuccess(data) {
+    return {type:CREATE_ORDER,data}
 }
 
 function errorMsg(msg) {
@@ -77,4 +82,11 @@ export function deleteFromCart(user_id, product_id) {
 
 export function logout() {
     return {type:LOGOUT}
+}
+
+export function decreaseCart(data) {
+    console.log(data)
+     return dispatch => {
+         dispatch(createOrderSuccess(data))
+     }
 }

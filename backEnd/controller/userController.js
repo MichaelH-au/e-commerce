@@ -1,5 +1,5 @@
 var models = require('../models')
-
+require('../src/js/utils/dateTransform')
 module.exports = {
     create_user(req, res) {
 
@@ -55,6 +55,7 @@ module.exports = {
         let param = {}
         if (req.query.status == 'checked'){
             param.where = {status:'checked'}
+            param.attributes = ['count', 'product_id', 'status', 'user_id']
         }
         models.user.findOne({
             where: {
@@ -146,6 +147,7 @@ module.exports = {
         })
     },
     async setDefaultAddress(req, res) {
+        //TODO need transaction
         try{
             await models.address.update({
                 isDefault :0
@@ -180,6 +182,43 @@ module.exports = {
                 id:req.body.address_id,
                 userInfo:req.body.user_id
             }
+        })
+    },
+    createOrder(req, res){
+        let random1 = Math.floor(Math.random() * 10)
+        let random2 = Math.floor(Math.random() * 10)
+        console.log('start')
+        let sysDate = new Date().Format('yyyyMMddhhmmss')
+        console.log('start')
+        let orderId = random1 + sysDate + random2;
+        console.log(req.body)
+
+
+        return models.sequelize.transaction(function (t) {
+            return models.order.create({
+                orderId,
+                orderOwner:req.body.user_id,
+                orderAmount:req.body.orderAmount,
+                addressInfo:req.body.address_id,
+                orderInfo:req.body.orderInfo
+            },
+                {
+                    transaction: t,
+                }).then(value => {
+                    return models.carts.destroy({
+                        where:{
+                            user_id:req.body.user_id,
+                            status:'checked'
+                        }
+                    })
+            }).then(value =>{
+                console.log(value)
+            })
+        }).then(result =>{
+            res.json({data:{orderId, orderAmount:req.body.orderAmount}})
+        }).catch(error =>{
+            console.log(error)
+            res.json({error})
         })
     }
 }
