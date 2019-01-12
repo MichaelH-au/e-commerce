@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 
 class OrderCompleted extends Component {
     render() {
         console.log(this.props.location.state)
         return (
             <div>
-                {/*{!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}*/}
+                {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
                 <div className="check-step">
                     <ul>
                         <li className="cur"><span>Confirm</span> address</li>
@@ -25,7 +25,11 @@ class OrderCompleted extends Component {
                             <div className="col">Order Amount: {this.props.location.state.orderAmount}</div>
                         </div>
                         <div className='row justify-content-around'>
-                            <button className='col-5 p-2 btn btn-outline-success'>Cart List</button>
+                            <Link to='/cart'>
+                                <div className='col-5 p-2 '>
+                                    <button className='col-5 p-2 btn btn-outline-success'>Cart List</button>
+                                </div>
+                            </Link>
                             <button className='col-5 p-2 btn btn-outline-info'>Order List</button>
                         </div>
 
