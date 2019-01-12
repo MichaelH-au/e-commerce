@@ -184,6 +184,17 @@ module.exports = {
             }
         })
     },
+    createAddress(req, res){
+        models.address.create({
+            userInfo:req.body.user_id,
+            contactName:req.body.contactName,
+            address:req.body.address,
+            phoneNumber:req.body.phoneNumber,
+            postCode:req.body.postCode
+        }).then(value =>{
+            res.json({data:value})
+        })
+    },
     createOrder(req, res){
         let random1 = Math.floor(Math.random() * 10)
         let random2 = Math.floor(Math.random() * 10)

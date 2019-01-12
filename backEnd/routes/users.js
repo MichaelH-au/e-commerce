@@ -42,6 +42,9 @@ router.post('/address/delete', function(req, res, next) {
     userController.deleteAddress(req,res)
 })
 
+router.post('/address/create', function(req, res, next) {
+    userController.createAddress(req,res)
+})
 
 router.post('/order/create', function(req, res, next) {
     userController.createOrder(req,res)

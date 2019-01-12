@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Redirect, Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import './Address.css'
+import $ from 'jquery';
 import axios from "axios";
 
 class Address extends Component {
@@ -9,10 +10,15 @@ class Address extends Component {
         super(props)
         this.state = {
             addressList:[],
-            selectedAddress:null
+            selectedAddress:null,
+            contactName:'',
+            address:'',
+            phoneNumber:'',
+            postCode:''
         }
     }
     componentDidMount(){
+        console.log($)
         console.log(this.props.user)
         axios.get('/api/users/address', {params:{user_id:this.props.user.id}})
             .then(res => {
@@ -61,12 +67,65 @@ class Address extends Component {
         this.setState({
             addressList:list
         })
-
+    }
+    addNewAddress(){
+        let contactName = this.state.contactName
+        let address = this.state.address
+        let phoneNumber = this.state.phoneNumber
+        let postCode = this.state.postCode
+        //TODO validation
+        axios.post('/api/users/address/create', {contactName,user_id:this.props.user.id,address,phoneNumber,postCode})
+            .then(res => {
+                $('#exampleModal').modal('hide')
+                let list = this.state.addressList;
+                list.push(res.data.data)
+                this.setState({
+                    addressList:list
+                })
+            })
     }
     render() {
         return (
             <div>
                 {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
+
+                <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">New address</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <div className='col-5'>
+                                    <label>Contact Name</label>
+                                    <input type="text" className="form-control" onChange={v=>this.handleChange('contactName',v.target.value)} placeholder="Nick" required/>
+                                </div>
+                                <div className='col-5'>
+                                    <label>Contact Number</label>
+                                    <input type="text" className="form-control" onChange={v=>this.handleChange('phoneNumber',v.target.value)} placeholder="0414978789" required/>
+                                </div>
+                                <div className='col-5'>
+                                    <label>Postcode</label>
+                                    <input type="text" className="form-control" onChange={v=>this.handleChange('postCode',v.target.value)} placeholder="2000" required/>
+                                </div>
+                                <div className='col-7'>
+                                    <label>Address</label>
+                                    <input type="text" className="form-control" onChange={v=>this.handleChange('address',v.target.value)} placeholder="UNSW Sydney" required/>
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary" onClick={()=>this.addNewAddress()}>Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/*Modal*/}
                 <div className="check-step">
                     <ul>
                         <li className="cur"><span>Confirm</span> address</li>
@@ -96,7 +155,9 @@ class Address extends Component {
                     ))}
                     <div className='addressBox text-center flex-column'>
                         <div className='w-100'>
-                            <img className='addAddressIcon mt-5' src={require("../../images/Address/plus-o.png")} alt=""/>
+                            <button className='addAddressIcon mt-5' data-toggle="modal" data-target="#exampleModal">
+                                <img className='w-100' src={require("../../images/Address/plus-o.png")} alt=""/>
+                            </button>
                         </div>
                         <div className='mt-3 greyColor '>Add new address</div>
                     </div>
