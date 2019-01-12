@@ -101,7 +101,7 @@ class Cart extends Component {
                     <div className="col-2">Edit</div>
                 </div>
                 {this.state.cartList.map((item, index) =>(
-                    <div className='row text-center pt-4 cartItemList w-100' key={index}>
+                    <div className='row text-center pt-4 cartItemList w-100 greyColor' key={index}>
                         <div className="col-4">
                             <div className='row justify-content-start align-items-center'>
                                 {item.carts.status === 'pending' ?
@@ -141,8 +141,13 @@ class Cart extends Component {
                         return sum
                     }, 0)}</div>
 
+
                     <button className={this.state.checkoutCounter ? "col-2 btn btn-danger text-white" :"col-2 btn btn-secondary text-white"} disabled={!this.state.checkoutCounter}>
-                        <Link to='/address'>Checkout</Link>
+                        <Link to='/address'>
+                            <div className='w-100'>
+                                Checkout
+                            </div>
+                        </Link>
                     </button>
                 </div>
             </div>
