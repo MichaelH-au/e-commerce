@@ -64,7 +64,7 @@ class OrderConfirm extends Component {
                     <div className="col-2">Subtotal</div>
                 </div>
                 {this.state.cartList.map((item, index) =>(
-                    <div className='row text-center pt-4 cartItemList w-100' key={index}>
+                    <div className='row text-center pt-4 cartItemList w-100 greyColor' key={index}>
                         <div className="col-6">
                             <div className='row justify-content-start align-items-center ml-5'>
                                 <img className='cartItemImage' src={item.imagePath} alt=""/>
@@ -72,13 +72,13 @@ class OrderConfirm extends Component {
                             </div>
 
                         </div>
-                        <div className="col-2">{item.productPrice}</div>
+                        <div className="col-2">${item.productPrice}</div>
                         <div className="col-2">
                             <div className='row justify-content-center'>
                                 <div className='w-25 text-center mr-2' >{item.carts.count}</div>
                             </div>
                         </div>
-                        <div className="col-2">{parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
+                        <div className="col-2">${parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
                     </div>
                 ))}
                 <div className="row justify-content-end w-100">

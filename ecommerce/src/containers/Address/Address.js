@@ -78,9 +78,9 @@ class Address extends Component {
                 <div className="checkout-title ml-5">
                     <h2><span>Shipping address</span></h2>
                 </div>
-                <div className='row w-100'>
+                <div className='row w-100 greyColor'>
                     {this.state.addressList.map((item, index) =>(
-                        <div className={`addressBox text-left flex-column pl-4 ${this.state.selectedAddress === item.id ? 'activeBorder' : ''}`} onClick={()=>this.handleChange('selectedAddress',item.id)} key={index}>
+                        <div className={`addressBox text-left flex-column pl-4  ${this.state.selectedAddress === item.id ? 'activeBorder' : ''}`} onClick={()=>this.handleChange('selectedAddress',item.id)} key={index}>
                             <div className='mt-2 greyColor'>{item.contactName}</div>
                             <div className='mt-2 greyColor'>{item.address}</div>
                             <div className='mt-2 greyColor'>{item.postCode}</div>
