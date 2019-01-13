@@ -128,7 +128,7 @@ class Home extends Component {
             <div className='home'>
                 <AddToCart/>
                 <NavBread/>
-                <div className="row justify-content-center">
+                <div className="row justify-content-center p-0 m-0">
                     <div className="col-2 border border-info p-0">
                         <CateList/>
                     </div>
@@ -140,9 +140,18 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className='container-fluid '>
-                    <div className='row justify-content-end '>
+                    <div className='row justify-content-center mt-3 '>
+                            {/*<div>Price range</div>*/}
+                            <div onClick={()=>this.handleChange('selectedPriceRange','all')} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange==='all'?'priceActive ':''}`}>All</div>
+
+                            {this.state.priceFilter.map((price, index) => (
+                                <div onClick={()=>this.handleChange('selectedPriceRange',index)} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange=== index?'priceActive ':''}`} key={index}>
+                                        ${price.startPrice} - {price.endPrice}
+                                </div>
+                            ))}
+
                         <div className='col-2'>
-                            <span>sort </span>
+                            <span>sort by</span>
                             <select name="sord" onChange={(v)=>this.sortChange(v)}>
                                 <option value="">Null</option>
                                 <option value="Highest">Highest</option>
@@ -150,38 +159,42 @@ class Home extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className='row'>
-                        <div className='col-2 pl-2'>
-                            <p>Price</p>
-                            <div onClick={()=>this.handleChange('selectedPriceRange','all')} className={this.state.selectedPriceRange==='all'?'priceActive cursor':'cursor'}><p>All</p></div>
-                            {this.state.priceFilter.map((price, index) => (
-                                <div onClick={()=>this.handleChange('selectedPriceRange',index)} className={this.state.selectedPriceRange===index?'priceActive cursor':'cursor'} key={index}>
-                                    <p>
-                                        {price.startPrice} - {price.endPrice}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="col-10">
-                            <div className='row'>
+                    <div className='itemArea'>
+                        {/*<div className='col-2 pl-5'>*/}
+                            {/*/!*<p>Price</p>*!/*/}
+                            {/*<div onClick={()=>this.handleChange('selectedPriceRange','all')} className={this.state.selectedPriceRange==='all'?'priceActive cursor':'cursor'}><p>All</p></div>*/}
+                            {/*{this.state.priceFilter.map((price, index) => (*/}
+                                {/*<div onClick={()=>this.handleChange('selectedPriceRange',index)} className={this.state.selectedPriceRange===index?'priceActive cursor':'cursor'} key={index}>*/}
+                                    {/*<p>*/}
+                                        {/*{price.startPrice} - {price.endPrice}*/}
+                                    {/*</p>*/}
+                                {/*</div>*/}
+                            {/*))}*/}
+
+                        {/*</div>*/}
+                        {/*<div className="row">*/}
+                            <div className='row justify-content-start'>
                                 {this.state.productList.map((item, index) => (
-                                    <div className='card p-0 mr-5 mt-5 productCards' key={index}>
+                                    <div className='card p-0 mr-5 mt-2 productCards' key={index}>
                                         <div className='card-body p-0'>
                                             <div className='itemImage'>
                                                 <img className='w-100 h-100' src={item.imagePath} alt=''></img>
                                             </div>
                                         </div>
                                         <div className='card-footer'>
-                                            <p>Name: {item.productName}</p>
-                                            <p>Price: {item.productPrice}</p>
-                                            <button className='btn btn-outline-info w-100' onClick={()=> this.props.user.isAuth ? this.addToCart(item.id) : this.props.history.push('login')}>Add to cart</button>
+                                            <div className='text-center text-capitalize fontSizeLarge greyColor'>{item.productName}</div>
+                                            <div className="row border-top border-danger justify-content-between">
+                                                <p className='itemPrice ml-3'>$ {item.productPrice}</p>
+
+                                                <button className='btn btn-danger col-3 w-50 p-0 fontSizeSmall' onClick={()=> this.props.user.isAuth ? this.addToCart(item.id) : this.props.history.push('login')}>Add to cart</button>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                             {/*<h1>{this.state.test}</h1>*/}
-                            {this.state.loadFinish ? <h1>No more items</h1> : null}
-                        </div>
+                            {/*{this.state.loadFinish ? <h1>No more items</h1> : null}*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>

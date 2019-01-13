@@ -17,6 +17,7 @@ import Cart from './containers/Cart/Cart'
 import Address from './containers/Address/Address'
 import OrderConfirm from './containers/OrderConfirm'
 import OrderCompleted from './containers/OrderCompleted/OrderCompleted'
+import Footer from './components/Footer/Footer'
 
 ReactDOM.render(
     <Provider store={store}>
@@ -33,6 +34,7 @@ ReactDOM.render(
                     <Route path='/orderconfirm' exact component={OrderConfirm}></Route>
                     <Route path='/ordercompleted' exact component={OrderCompleted}></Route>
                 </Switch>
+                <Footer/>
             </div>
         </BrowserRouter>
     </Provider>

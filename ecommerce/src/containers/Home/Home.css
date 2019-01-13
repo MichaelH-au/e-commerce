@@ -17,13 +17,32 @@
 }
 
 .priceActive{
-    color:red;
-    border-left: 5px solid lightblue;
-    padding-left: 5px;
+    color:gray;
+    /*border-left: 5px solid lightblue;*/
+    /*padding-left: 5px;*/
+    background-color: lightgray;
     transition: .5s;
-    display: block;
+    /*display: block;*/
     font-weight: bold;
+    /*line-height: 20px;*/
 }
 .cursor{
     cursor: pointer;
+}
+
+.itemPrice{
+    font-family: 'Tahoma';
+    font-size: 1.2em;
+}
+.fontSizeSmall{
+    font-size: 0.8em;
+}
+.fontSizeLarge{
+    font-size: 1.2em;
+}
+
+.itemArea{
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
 }
