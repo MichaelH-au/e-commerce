@@ -155,13 +155,13 @@ class Address extends Component {
                         <div className='mt-3 greyColor '>Add new address</div>
                     </div>
                 </div>
-                <div className='row justify-content-between w-100 p-0 mt-5'>
+                <div className='row justify-content-between align-items-center w-100 p-0 mt-5 mb-5'>
                     <div className='col-2 ml-5'>
                         <Link to='/cart'>
                             <button className='btn btn-outline-success'>Previous</button>
                         </Link>
                     </div>
-                    <div className='col-2 mr-5 mt-3'>
+                    <div className='col-2 mr-5'>
                         <Link to={{pathname:'/orderconfirm',
                             state:{address_id:this.state.selectedAddress}
                         }}>

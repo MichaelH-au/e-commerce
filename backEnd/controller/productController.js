@@ -36,7 +36,7 @@ module.exports = {
             if (category) {
                 param.where.category = category
             }
-        } else {
+        } else if (category){
             param.where = {category}
 
         }

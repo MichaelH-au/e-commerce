@@ -91,7 +91,7 @@ class Cart extends Component {
     render() {
         console.log(this.props.user)
         return (
-            <div>
+            <div className='minHeight'>
                 {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
                 <div className='row text-center mt-5 bg-info text-white w-100'>
                     <div className="col-4">Items</div>

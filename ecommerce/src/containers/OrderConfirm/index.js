@@ -50,7 +50,7 @@ class OrderConfirm extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='pb-5'>
                 {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
                 <div className="check-step">
                     <ul>

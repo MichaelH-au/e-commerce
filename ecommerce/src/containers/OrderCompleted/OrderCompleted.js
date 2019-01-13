@@ -5,7 +5,7 @@ import {Redirect} from "react-router-dom";
 class OrderCompleted extends Component {
     render() {
         return (
-            <div>
+            <div className='minHeight'>
                 {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
                 <div className="check-step">
                     <ul>
