@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { addToCart } from "../user/store/actions";
+import { getProducts } from "./store/actions";
+import { updateProductList } from "./store/actions";
 import './Home.css'
 import AddToCart from '../../components/Modal/addCart'
 import $ from 'jquery';
@@ -9,6 +11,7 @@ import NavBread from '../../components/NavBread/NavBread'
 import CateList from '../../components/CateList/CatList'
 import Carousel from '../../components/Carousel/Carousel'
 import Advertise from '../../components/Advertisement/Advertise'
+import ItemArea from '../../components/ItemArea/ItemArea'
 
 class Home extends Component {
     constructor(props){
@@ -39,12 +42,13 @@ class Home extends Component {
         window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
     componentDidMount() {
-        axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:this.state.selectedPriceRange}})
-            .then(res => {
-                this.setState({
-                    productList:res.data.result
-                })
-            })
+        // axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:this.state.selectedPriceRange}})
+        //     .then(res => {
+        //         this.setState({
+        //             productList:res.data.result
+        //         })
+        //     })
+        this.props.getProducts(this.state.selectedPriceRange)
         window.addEventListener('scroll', this.handleScroll.bind(this));
     }
     handleScroll(e) {
@@ -57,9 +61,10 @@ class Home extends Component {
                 .then(res => {
                     if (res.data.result.length < 4) {
                         if (res.data.result.length > 0){
+                            this.props.updateProductList('push', res.data.result)
                             this.setState({
                                 loadFinish:false,
-                                productList:this.state.productList.push(...res.data.result),
+                                // productList:this.state.productList.push(...res.data.result),
                                 itemLoading:false
                             })
                         } else {
@@ -69,11 +74,12 @@ class Home extends Component {
                             })
                         }
                     } else {
-                        let list = this.state.productList;
-                        list.push(...res.data.result);
+                        // let list = this.state.productList;
+                        // list.push(...res.data.result);
+                        this.props.updateProductList('push', res.data.result)
                         this.setState({
                             itemOffset:this.state.itemOffset + 4,
-                            productList:list,
+                            // productList:list,
                             itemLoading:false
                         })
                     }
@@ -85,44 +91,39 @@ class Home extends Component {
         this.setState({
             [key]:value
         })
-        axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:value}})
-            .then(res => {
-                this.setState({
-                    productList:res.data.result
-                })
-            })
+        this.props.getProducts(value)
+        // axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:value}})
+        //     .then(res => {
+        //         this.setState({
+        //             productList:res.data.result
+        //         })
+        //     })
     }
     sortChange(e){
-        if (e.target.value === 'Highest') {
-            let list = this.state.productList;
-            list = list.sort(function(a, b) {
-                var x = parseInt(a.productPrice);
-                var y = parseInt(b.productPrice);
-                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-            });
-            this.setState({
-                productList:list
-            })
-        } else if (e.target.value === 'Lowest') {
-            let list = this.state.productList;
-            list = list.sort(function(a, b) {
-                var x = parseInt(a.productPrice);
-                var y = parseInt(b.productPrice);
-                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-            });
-            this.setState({
-                productList:list
-            })
-
-        }
+        let list = this.props.product.productList;
+        list = list.sort(function(a, b) {
+            var x = parseInt(a.productPrice);
+            var y = parseInt(b.productPrice);
+            if (e.target.value === 'Highest')
+            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+        // if (e.target.value === 'Highest') {
+        //     list = list.sort(function(a, b) {
+        //         var x = parseInt(a.productPrice);
+        //         var y = parseInt(b.productPrice);
+        //         return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        //     });
+        // } else if (e.target.value === 'Lowest') {
+        //     list = list.sort(function(a, b) {
+        //         var x = parseInt(a.productPrice);
+        //         var y = parseInt(b.productPrice);
+        //         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        //     });
+        // }
+        this.props.updateProductList('update',list)
     }
 
-    addToCart(id){
-        let user_id =this.props.user.id;
-        let product_id = id;
-        this.props.addToCart(user_id, product_id)
-        $('#addToCart').modal('show')
-    }
     render() {
         return (
             <div className='home'>
@@ -141,14 +142,14 @@ class Home extends Component {
                 </div>
                 <div className='container-fluid '>
                     <div className='row justify-content-center mt-3 '>
-                            {/*<div>Price range</div>*/}
-                            <div onClick={()=>this.handleChange('selectedPriceRange','all')} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange==='all'?'priceActive ':''}`}>All</div>
+                        {/*<div>Price range</div>*/}
+                        <div onClick={()=>this.handleChange('selectedPriceRange','all')} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange==='all'?'priceActive ':''}`}>All</div>
 
-                            {this.state.priceFilter.map((price, index) => (
-                                <div onClick={()=>this.handleChange('selectedPriceRange',index)} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange=== index?'priceActive ':''}`} key={index}>
-                                        ${price.startPrice} - {price.endPrice}
-                                </div>
-                            ))}
+                        {this.state.priceFilter.map((price, index) => (
+                            <div onClick={()=>this.handleChange('selectedPriceRange',index)} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange=== index?'priceActive ':''}`} key={index}>
+                                ${price.startPrice} - {price.endPrice}
+                            </div>
+                        ))}
 
                         <div className='col-2'>
                             <span>sort by</span>
@@ -159,50 +160,15 @@ class Home extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className='itemArea'>
-                        {/*<div className='col-2 pl-5'>*/}
-                            {/*/!*<p>Price</p>*!/*/}
-                            {/*<div onClick={()=>this.handleChange('selectedPriceRange','all')} className={this.state.selectedPriceRange==='all'?'priceActive cursor':'cursor'}><p>All</p></div>*/}
-                            {/*{this.state.priceFilter.map((price, index) => (*/}
-                                {/*<div onClick={()=>this.handleChange('selectedPriceRange',index)} className={this.state.selectedPriceRange===index?'priceActive cursor':'cursor'} key={index}>*/}
-                                    {/*<p>*/}
-                                        {/*{price.startPrice} - {price.endPrice}*/}
-                                    {/*</p>*/}
-                                {/*</div>*/}
-                            {/*))}*/}
-
-                        {/*</div>*/}
-                        {/*<div className="row">*/}
-                            <div className='row justify-content-start'>
-                                {this.state.productList.map((item, index) => (
-                                    <div className='card p-0 mr-5 mt-2 productCards' key={index}>
-                                        <div className='card-body p-0'>
-                                            <div className='itemImage'>
-                                                <img className='w-100 h-100' src={item.imagePath} alt=''></img>
-                                            </div>
-                                        </div>
-                                        <div className='card-footer'>
-                                            <div className='text-center text-capitalize fontSizeLarge greyColor'>{item.productName}</div>
-                                            <div className="row border-top border-danger justify-content-between">
-                                                <p className='itemPrice ml-3'>$ {item.productPrice}</p>
-
-                                                <button className='btn btn-danger col-3 w-50 p-0 fontSizeSmall' onClick={()=> this.props.user.isAuth ? this.addToCart(item.id) : this.props.history.push('login')}>Add to cart</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                            {/*<h1>{this.state.test}</h1>*/}
-                            {/*{this.state.loadFinish ? <h1>No more items</h1> : null}*/}
-                        {/*</div>*/}
-                    </div>
+                    <ItemArea data={this.props.product.productList}/>
                 </div>
             </div>
         );
     }
 }
 const mapStateToProps = state => ({
-    user:state.user
+    user:state.user,
+    product:state.product
 })
-const actionCreators = { addToCart }
+const actionCreators = { addToCart, getProducts, updateProductList }
 export default connect(mapStateToProps, actionCreators)(Home)

@@ -1,12 +1,27 @@
 .listItem:hover{
     font-weight: bold;
-    color: orange;
+    color: gray;
     cursor: pointer;
+    background-color: #cccccc;
 }
 .catListBox{
     height: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    /*align-items: center;*/
     flex:1;
+}
+.listItem{
+    /*background-color: greenyellow;*/
+    flex: 1;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*line-height: 40px;*/
+}
+.listActive{
+    font-weight: bold;
+    color: gray;
+    cursor: pointer;
+    background-color: #cccccc;
 }
