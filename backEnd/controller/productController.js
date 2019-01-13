@@ -4,6 +4,7 @@ module.exports = {
         let limit = parseInt(req.query.limit);
         let offset = parseInt(req.query.offset)
         let selectedRange = req.query.selectedRange;
+        let category = req.query.category;
         let priceGr = '';
         let priceLte = ''
         let param = {
@@ -32,7 +33,14 @@ module.exports = {
                     [models.Sequelize.Op.between]: [priceGr, priceLte]
                 }
             }
+            if (category) {
+                param.where.category = category
+            }
+        } else {
+            param.where = {category}
+
         }
+        console.log(param)
         models.product.findAll(param).then(values =>{
             res.json({status:0, msg:'', result:values})
         })

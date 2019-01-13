@@ -10,10 +10,11 @@ export function changeCategory(data) {
     }
 }
 
-export function getProducts(selectedPriceRange) {
+export function getProducts(selectedPriceRange, category) {
     return dispatch => {
         console.log(selectedPriceRange)
-        axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:selectedPriceRange}})
+        console.log(category)
+        axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:selectedPriceRange, category}})
             .then(res => {
                 console.log(res.data.result)
                 dispatch({type:GET_PRODUCTS, data:res.data.result})

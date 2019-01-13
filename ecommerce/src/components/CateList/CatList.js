@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { getProducts } from "../../containers/Home/store/actions";
 import './CatList.css'
 
 class CatList extends Component {
@@ -10,16 +11,17 @@ class CatList extends Component {
         }
     }
 
-    changeHandler(key, value){
+    changeHandler(key, index, value){
         this.setState({
-            [key]:value
+            [key]:index
         })
+        this.props.getProducts('all', value)
     }
     render() {
         return (
             <div className='bg-white catListBox'>
                 {this.props.product.category.map((item, index) => (
-                    <div className={`greyColor listItem fontSizeSmall p-2 ${this.state.selectCate === index ? 'listActive':''}`} onClick={(v)=>this.changeHandler('selectCate',index)} key={index}>{item}</div>
+                    <div className={`greyColor listItem fontSizeSmall p-2 ${this.state.selectCate === index ? 'listActive':''}`} onClick={(v)=>this.changeHandler('selectCate',index, item)} key={index}>{item}</div>
                 ))}
             </div>
         );
@@ -32,6 +34,8 @@ function mapStateToProps(state) {
     };
 }
 
+const actionCreator = { getProducts }
+
 export default connect(
-    mapStateToProps,
+    mapStateToProps, actionCreator
 )(CatList);

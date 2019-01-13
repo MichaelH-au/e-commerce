@@ -42,12 +42,6 @@ class Home extends Component {
         window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
     componentDidMount() {
-        // axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:this.state.selectedPriceRange}})
-        //     .then(res => {
-        //         this.setState({
-        //             productList:res.data.result
-        //         })
-        //     })
         this.props.getProducts(this.state.selectedPriceRange)
         window.addEventListener('scroll', this.handleScroll.bind(this));
     }
@@ -64,7 +58,6 @@ class Home extends Component {
                             this.props.updateProductList('push', res.data.result)
                             this.setState({
                                 loadFinish:false,
-                                // productList:this.state.productList.push(...res.data.result),
                                 itemLoading:false
                             })
                         } else {
@@ -74,12 +67,9 @@ class Home extends Component {
                             })
                         }
                     } else {
-                        // let list = this.state.productList;
-                        // list.push(...res.data.result);
                         this.props.updateProductList('push', res.data.result)
                         this.setState({
                             itemOffset:this.state.itemOffset + 4,
-                            // productList:list,
                             itemLoading:false
                         })
                     }
@@ -92,12 +82,6 @@ class Home extends Component {
             [key]:value
         })
         this.props.getProducts(value)
-        // axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:value}})
-        //     .then(res => {
-        //         this.setState({
-        //             productList:res.data.result
-        //         })
-        //     })
     }
     sortChange(e){
         let list = this.props.product.productList;
@@ -105,22 +89,9 @@ class Home extends Component {
             var x = parseInt(a.productPrice);
             var y = parseInt(b.productPrice);
             if (e.target.value === 'Highest')
-            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
-        // if (e.target.value === 'Highest') {
-        //     list = list.sort(function(a, b) {
-        //         var x = parseInt(a.productPrice);
-        //         var y = parseInt(b.productPrice);
-        //         return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-        //     });
-        // } else if (e.target.value === 'Lowest') {
-        //     list = list.sort(function(a, b) {
-        //         var x = parseInt(a.productPrice);
-        //         var y = parseInt(b.productPrice);
-        //         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-        //     });
-        // }
         this.props.updateProductList('update',list)
     }
 
