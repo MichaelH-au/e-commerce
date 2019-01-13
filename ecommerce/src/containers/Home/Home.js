@@ -3,6 +3,8 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { addToCart } from "../user/store/actions";
 import './Home.css'
+import AddToCart from '../../components/Modal/addCart'
+import $ from 'jquery';
 
 class Home extends Component {
     constructor(props){
@@ -117,6 +119,7 @@ class Home extends Component {
         let user_id =this.props.user.id;
         let product_id = id;
         this.props.addToCart(user_id, product_id)
+        $('#addToCart').modal('show')
         // axios.post('/api/products/addCart', {user_id,product_id,count:1})
         //     .then(res => {
         //         console.log(res)
@@ -125,6 +128,7 @@ class Home extends Component {
     render() {
         return (
             <div className='home'>
+                <AddToCart/>
                 <div className='container-fluid '>
                     <div className='row justify-content-end'>
                         <div className='col-2'>
