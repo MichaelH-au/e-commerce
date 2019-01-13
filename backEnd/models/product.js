@@ -12,6 +12,9 @@ module.exports = function (sequelize, dataType) {
             type: dataType.INTEGER,
             allowNull: false
         },
+        category:{
+            type: dataType.STRING,
+        }
     }, {
         underscored: true
     });

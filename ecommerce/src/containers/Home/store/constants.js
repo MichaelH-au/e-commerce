@@ -1,0 +1,1 @@
+export const CHANGE_CATE = 'PRODUCT/CHANGE_CATE'

@@ -5,6 +5,8 @@ import { addToCart } from "../user/store/actions";
 import './Home.css'
 import AddToCart from '../../components/Modal/addCart'
 import $ from 'jquery';
+import NavBread from '../../components/NavBread/NavBread'
+import CateList from '../../components/CateList/CatList'
 
 class Home extends Component {
     constructor(props){
@@ -123,6 +125,12 @@ class Home extends Component {
         return (
             <div className='home'>
                 <AddToCart/>
+                <NavBread/>
+                <div className="row justify-content-center">
+                    <div className="col-2 border border-info p-0">
+                        <CateList/>
+                    </div>
+                </div>
                 <div className='container-fluid '>
                     <div className='row justify-content-end '>
                         <div className='col-2'>
