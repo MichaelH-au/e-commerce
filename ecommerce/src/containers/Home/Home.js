@@ -7,6 +7,8 @@ import AddToCart from '../../components/Modal/addCart'
 import $ from 'jquery';
 import NavBread from '../../components/NavBread/NavBread'
 import CateList from '../../components/CateList/CatList'
+import Carousel from '../../components/Carousel/Carousel'
+import Advertise from '../../components/Advertisement/Advertise'
 
 class Home extends Component {
     constructor(props){
@@ -130,6 +132,12 @@ class Home extends Component {
                     <div className="col-2 border border-info p-0">
                         <CateList/>
                     </div>
+                    <div className="col-5 p-0">
+                        <Carousel/>
+                    </div>
+                    <div className="col-2">
+                        <Advertise/>
+                    </div>
                 </div>
                 <div className='container-fluid '>
                     <div className='row justify-content-end '>
@@ -145,9 +153,9 @@ class Home extends Component {
                     <div className='row'>
                         <div className='col-2 pl-2'>
                             <p>Price</p>
-                            <div onClick={()=>this.handleChange('selectedPriceRange','all')} className={this.state.selectedPriceRange==='all'?'active cursor':'cursor'}><p>All</p></div>
+                            <div onClick={()=>this.handleChange('selectedPriceRange','all')} className={this.state.selectedPriceRange==='all'?'priceActive cursor':'cursor'}><p>All</p></div>
                             {this.state.priceFilter.map((price, index) => (
-                                <div onClick={()=>this.handleChange('selectedPriceRange',index)} className={this.state.selectedPriceRange===index?'active cursor':'cursor'} key={index}>
+                                <div onClick={()=>this.handleChange('selectedPriceRange',index)} className={this.state.selectedPriceRange===index?'priceActive cursor':'cursor'} key={index}>
                                     <p>
                                         {price.startPrice} - {price.endPrice}
                                     </p>

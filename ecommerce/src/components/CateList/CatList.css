@@ -3,3 +3,10 @@
     color: orange;
     cursor: pointer;
 }
+.catListBox{
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex:1;
+}

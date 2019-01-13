@@ -16,7 +16,7 @@
     background-color: lightblue;
 }
 
-.active{
+.priceActive{
     color:red;
     border-left: 5px solid lightblue;
     padding-left: 5px;

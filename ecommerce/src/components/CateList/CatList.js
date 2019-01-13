@@ -5,9 +5,9 @@ import './CatList.css'
 class CatList extends Component {
     render() {
         return (
-            <div className='bg-white p-2'>
+            <div className='bg-white p-2 catListBox'>
                 {this.props.product.category.map((item, index) => (
-                    <div className='greyColor mb-2 listItem' key={index}>{item}</div>
+                    <div className='greyColor listItem ' key={index}>{item}</div>
                 ))}
             </div>
         );
