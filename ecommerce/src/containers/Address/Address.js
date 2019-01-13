@@ -18,11 +18,8 @@ class Address extends Component {
         }
     }
     componentDidMount(){
-        console.log($)
-        console.log(this.props.user)
         axios.get('/api/users/address', {params:{user_id:this.props.user.id}})
             .then(res => {
-                console.log(res.data)
                 let selectedIndex = null;
                 res.data.data.forEach(item=>{
                     if (item.isDefault) {
@@ -44,14 +41,12 @@ class Address extends Component {
     setDefaultAddress(address_id){
         axios.post('/api/users/address/setDefault', {address_id,user_id:this.props.user.id})
             .then(res => {
-                console.log(res.data)
-                console.log(res.data.data)
             })
         let list = this.state.addressList;
         list.forEach((item)=>{
-            if(item.isDefault && item.id != address_id) {
+            if(item.isDefault && item.id !== address_id) {
                 item.isDefault = 0
-            } else if (item.id == address_id) {
+            } else if (item.id === address_id) {
                 item.isDefault = 1
             }
         })
@@ -59,8 +54,6 @@ class Address extends Component {
     deleteAddress(address_id, index){
         axios.post('/api/users/address/delete', {address_id,user_id:this.props.user.id})
             .then(res => {
-                console.log(res.data)
-                console.log(res.data.data)
             })
         let list = this.state.addressList;
         list.splice(index,1)
@@ -182,7 +175,6 @@ class Address extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
         user:state.user
     };

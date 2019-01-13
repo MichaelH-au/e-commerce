@@ -19,7 +19,7 @@ class Header extends Component {
                                 <div className='mr-3'>Hello {this.props.user.userName}</div>
                                 <Link to={'cart'}>
                                     <div className='cart mr-4'>
-                                        <img className='cart' src={require('../../images/Header/cart.png')}/>
+                                        <img className='cart' src={require('../../images/Header/cart.png')} alt=''/>
                                         <div className='itemCounter p-0'>{this.props.user.itemInCart}</div>
                                     </div>
                                 </Link>

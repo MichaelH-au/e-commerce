@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Redirect, Link} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 class OrderCompleted extends Component {
     render() {
-        console.log(this.props.location.state)
         return (
             <div>
                 {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}

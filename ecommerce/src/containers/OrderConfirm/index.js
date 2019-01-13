@@ -5,9 +5,6 @@ import { decreaseCart } from "../user/store/actions";
 import axios from "axios";
 
 class OrderConfirm extends Component {
-    // componentWillMount(){
-    //     console.log(this.props.location.state)//val值
-    // }
     constructor(props){
         super(props)
         this.state = {
@@ -23,7 +20,6 @@ class OrderConfirm extends Component {
         axios.get('/api/users/cart', {params: {user_id: this.props.user.id, status: 'checked'}})
             .then(res => {
                 let counter = 0;
-                let selectAll = true
                 let itemTotal = res.data.data.reduce((sum,item)=>{
                     if (item.carts.status === 'checked')
                         return sum + parseInt(item.carts.count) * parseInt(item.productPrice)
@@ -38,7 +34,6 @@ class OrderConfirm extends Component {
                     total:itemTotal + tax + this.state.shipping - this.state.discount
                 })
 
-                console.log(this.state.cartList)
             })
     }
     createOrder(){
@@ -46,12 +41,9 @@ class OrderConfirm extends Component {
         let address_id = this.props.location.state.address_id;
         let orderAmount = this.state.total;
         let orderInfo = JSON.stringify(this.state.cartList);
-        console.log(user_id, address_id, orderAmount, orderInfo)
         // this.props.history.push({pathname: '/ordercompleted',state: { key: 11 }})
         axios.post('/api/users/order/create', {user_id, address_id, orderAmount, orderInfo})
             .then(res => {
-                console.log(res.data)
-                console.log(this.state.cartList.length)
                 this.props.decreaseCart(this.state.cartList.length)
                 this.props.history.push({pathname: '/ordercompleted',state: { orderId: res.data.data.orderId, orderAmount:res.data.data.orderAmount }})
             })

@@ -42,7 +42,6 @@ class Home extends Component {
                 })
             })
         window.addEventListener('scroll', this.handleScroll.bind(this));
-        console.log(this.props.user)
     }
     handleScroll(e) {
         let bottomHeight = document.documentElement.scrollHeight - document.documentElement.scrollTop - window.innerHeight
@@ -79,7 +78,6 @@ class Home extends Component {
     }
 
     handleChange(key, value){
-        // console.log(key, e.target.value)
         this.setState({
             [key]:value
         })
@@ -120,17 +118,13 @@ class Home extends Component {
         let product_id = id;
         this.props.addToCart(user_id, product_id)
         $('#addToCart').modal('show')
-        // axios.post('/api/products/addCart', {user_id,product_id,count:1})
-        //     .then(res => {
-        //         console.log(res)
-        //     })
     }
     render() {
         return (
             <div className='home'>
                 <AddToCart/>
                 <div className='container-fluid '>
-                    <div className='row justify-content-end'>
+                    <div className='row justify-content-end '>
                         <div className='col-2'>
                             <span>sort </span>
                             <select name="sord" onChange={(v)=>this.sortChange(v)}>
@@ -143,13 +137,13 @@ class Home extends Component {
                     <div className='row'>
                         <div className='col-2 pl-2'>
                             <p>Price</p>
-                            <a href='#' onClick={()=>this.handleChange('selectedPriceRange','all')} className={this.state.selectedPriceRange==='all'?'active':null}><p>All</p></a>
+                            <div onClick={()=>this.handleChange('selectedPriceRange','all')} className={this.state.selectedPriceRange==='all'?'active cursor':'cursor'}><p>All</p></div>
                             {this.state.priceFilter.map((price, index) => (
-                                <a href='#' onClick={()=>this.handleChange('selectedPriceRange',index)} className={this.state.selectedPriceRange===index?'active':null} key={index}>
+                                <div onClick={()=>this.handleChange('selectedPriceRange',index)} className={this.state.selectedPriceRange===index?'active cursor':'cursor'} key={index}>
                                     <p>
                                         {price.startPrice} - {price.endPrice}
                                     </p>
-                                </a>
+                                </div>
                             ))}
                         </div>
                         <div className="col-10">
@@ -158,7 +152,7 @@ class Home extends Component {
                                     <div className='card p-0 mr-5 mt-5 productCards' key={index}>
                                         <div className='card-body p-0'>
                                             <div className='itemImage'>
-                                                <img className='w-100 h-100' src={item.imagePath}></img>
+                                                <img className='w-100 h-100' src={item.imagePath} alt=''></img>
                                             </div>
                                         </div>
                                         <div className='card-footer'>

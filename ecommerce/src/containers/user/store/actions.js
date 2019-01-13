@@ -32,7 +32,7 @@ export function userLogin(username, password) {
     return dispatch=>{
         axios.post('/api/users/login', {username, password})
             .then(res=>{
-                if (res.status == 200 && res.data.data) {
+                if (res.status === 200 && res.data.data) {
                     //success
                     dispatch(loginSuccess(res.data.data))
                 } else {
@@ -46,16 +46,13 @@ export function addToCart(user_id,product_id) {
     return dispatch => {
         axios.post('/api/products/addCart', {user_id,product_id,count:1})
             .then(res => {
-                console.log(res)
-                if (res.status == 200 && res.data.succ =='update') {
+                if (res.status === 200 && res.data.succ ==='update') {
                     //success
-                    console.log('add to cart')
                     dispatch(addToCartSuccess(0))
-                } else if (res.status == 200 && res.data.succ =='new'){
+                } else if (res.status === 200 && res.data.succ ==='new'){
                     dispatch(addToCartSuccess(1))
                 }
                 else {
-                    console.log('faile')
                     dispatch(errorMsg(res.data.error))
                 }
             })
@@ -66,14 +63,11 @@ export function deleteFromCart(user_id, product_id) {
     return dispatch => {
         axios.post('/api/users/cart/delete', {user_id,product_id})
             .then(res => {
-                console.log(res)
-                if (res.status == 200) {
+                if (res.status === 200) {
                     //success
-                    console.log('add to cart')
                     dispatch(deleteFromCartSuccess())
                 }
                 else {
-                    console.log('faile')
                     dispatch(errorMsg(res.data.error))
                 }
             })
@@ -85,7 +79,6 @@ export function logout() {
 }
 
 export function decreaseCart(data) {
-    console.log(data)
      return dispatch => {
          dispatch(createOrderSuccess(data))
      }

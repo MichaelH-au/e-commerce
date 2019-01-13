@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery';
-import Popper from 'popper.js';
+// import $ from 'jquery';
+// import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Header from "./components/Header/Header";
-import NavBread from "./components/NavBread/NavBread";
+// import NavBread from "./components/NavBread/NavBread";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import { Provider } from 'react-redux'
 import store from './store'

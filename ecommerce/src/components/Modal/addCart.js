@@ -3,9 +3,6 @@ import { withRouter} from 'react-router-dom';
 import $ from "jquery";
 
 class AddCart extends Component {
-    constructor(props){
-        super(props)
-    }
     moveToCart(){
         $('#addToCart').modal('hide');
         this.props.history.push('cart')
