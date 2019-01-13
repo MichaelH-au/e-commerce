@@ -30,7 +30,7 @@ class Footer extends Component {
                         <h6>My Account</h6>
                         <div>UNSW Sydnye</div>
                         <div>Email: huangjkau@gmail.com</div>
-                        <div>PhoneL: 0414978548</div>
+                        <div>Phone: 0414978548</div>
                     </div>
                 </div>
             </div>
