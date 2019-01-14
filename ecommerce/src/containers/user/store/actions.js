@@ -34,6 +34,8 @@ export function userLogin(username, password) {
             .then(res=>{
                 if (res.status === 200 && res.data.data) {
                     //success
+                    console.log('login')
+                    console.log(res.data.data)
                     dispatch(loginSuccess(res.data.data))
 
                 } else {

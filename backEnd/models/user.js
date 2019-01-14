@@ -15,23 +15,23 @@ module.exports = function (sequelize, dataType) {
         },
         Gender: {
             type: dataType.ENUM('Male', 'Female'),
-            allowNull: false
+            // allowNull: false
         },
         Date_of_birth: {
             type:dataType.DATE,
-            allowNull: false
+            // allowNull: false
         },
         Address: {
             type: dataType.STRING,
-            allowNull: false
+            // allowNull: false
         },
         Email_address: {
             type: dataType.STRING,
-            allowNull: false
+            // allowNull: false
         },
         Phone_number: {
             type: dataType.INTEGER,
-            allowNull: false
+            // allowNull: false
         },
     }, {
         underscored: true

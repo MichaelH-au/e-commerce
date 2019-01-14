@@ -8,11 +8,11 @@ module.exports = {
             userName: req.body.username,
             Password: req.body.password,
             Role: req.body.role,
-            Gender: req.body.gender,
-            Date_of_birth: req.body.birthday,
-            Address: req.body.address,
-            Email_address: req.body.email,
-            Phone_number: req.body.phone,
+            // Gender: req.body.gender,
+            // Date_of_birth: req.body.birthday,
+            // Address: req.body.address,
+            // Email_address: req.body.email,
+            // Phone_number: req.body.phone,
         }).then(function (value) {
             if (value) {
                 console.log('success')
@@ -37,6 +37,7 @@ module.exports = {
                 // }
             }
         }).then(data => {
+            console.log(data)
             // console.log(data.products)
             if (data) {
                 //TODO cookie

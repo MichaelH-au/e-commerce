@@ -1,0 +1,11 @@
+.registerContainer{
+    /*background-image: url("https://images.pexels.com/photos/112811/pexels-photo-112811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");*/
+    background-color: dark;
+    background-size: cover;
+    width: 100vw;
+    /*padding-top: 100px;*/
+}
+.registerBox{
+    display: flex;
+    flex-direction: column;
+}
