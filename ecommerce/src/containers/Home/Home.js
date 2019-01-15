@@ -99,7 +99,7 @@ class Home extends Component {
         return (
             <div className='home'>
                 <AddToCart/>
-                <NavBread/>
+                {/*<NavBread/>*/}
                 <div className="row justify-content-center p-0 m-0">
                     <div className="col-2 border border-info p-0">
                         <CateList/>

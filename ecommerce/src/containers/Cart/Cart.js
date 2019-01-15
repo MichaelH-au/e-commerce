@@ -91,9 +91,9 @@ class Cart extends Component {
     render() {
         console.log(this.props.user)
         return (
-            <div className='minHeight'>
+            <div className='minHeight container cartListBox'>
                 {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
-                <div className='row text-center mt-5 bg-info text-white w-100'>
+                <div className='row text-center mt-5 w-100 cartTitle p-2'>
                     <div className="col-4">Items</div>
                     <div className="col-2">Price</div>
                     <div className="col-2">Quantity</div>
@@ -101,7 +101,7 @@ class Cart extends Component {
                     <div className="col-2">Edit</div>
                 </div>
                 {this.state.cartList.map((item, index) =>(
-                    <div className='row text-center pt-4 cartItemList w-100 greyColor' key={index}>
+                    <div className='row align-items-center text-center cartItemList w-100 greyColor' key={index}>
                         <div className="col-4">
                             <div className='row justify-content-start align-items-center'>
                                 {item.carts.status === 'pending' ?
@@ -109,33 +109,33 @@ class Cart extends Component {
                                     <img className='checkBox' onClick={()=>this.checkboxHandler(index, 'pending', item.id)} src={require('../../images/Cart/check_box.png')} alt=""/>
                                 }
                                 <img className='cartItemImage' src={item.imagePath} alt=""/>
-                                <div className='ml-2'>{item.productName}</div>
+                                <div className='ml-2 greyColor font-weight-bold'>{item.productName}</div>
                             </div>
 
                         </div>
-                        <div className="col-2">{item.productPrice}</div>
+                        <div className="col-2">${item.productPrice}</div>
                         <div className="col-2">
-                            <div className='row justify-content-center'>
-                                <button className='btn btn-secondary mr-2' onClick={()=>this.countChange(index,parseInt(item.carts.count) - 1, item.id)}>-</button>
+                            <div className='row justify-content-center align-items-center'>
+                                <button className='btn mr-2 btn-light countButton p-0' onClick={()=>this.countChange(index,parseInt(item.carts.count) - 1, item.id)}>-</button>
                                 <input className='w-25 text-center mr-2' type="text" value={item.carts.count} onChange={(e)=>this.countChange(index,e.target.value, item.id)}/>
-                                <button className='btn btn-secondary' onClick={()=>this.countChange(index,parseInt(item.carts.count) + 1, item.id)}>+</button>
+                                <button className='btn btn-light countButton p-0' onClick={()=>this.countChange(index,parseInt(item.carts.count) + 1, item.id)}>+</button>
 
                             </div>
                         </div>
-                        <div className="col-2">{parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
+                        <div className="col-2 font-weight-bold">${parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
                         <div className="col-2" onClick={()=>this.deleteItem(item.id, index)}><img className='deleteIcon' src={require('../../images/Cart/trash.png')} alt=""/></div>
                     </div>
                 ))}
-                <div className='row text-center mt-5 bg-info text-white align-items-center w-100 p-0'>
-                    <div className="col-6 ">
+                <div className='row text-center mt-5 cartTitle text-white align-items-center w-100 p-0'>
+                    <div className="col-6 greyColor text-left">
                         {!this.state.selectAll ?
                             <img className='checkBox border-dark' onClick={() => this.selectAll()}  src={require('../../images/Cart/check-box-blank.png')} alt=""/> :
                             <img className='checkBox bg-white' onClick={() => this.selectAll()} src={require('../../images/Cart/check_box.png')} alt=""/>
                         }
                         Select All
                     </div>
-                    <div className="col-2">Total: </div>
-                    <div className="col-2">{this.state.cartList.reduce((sum,item)=>{
+                    <div className="col-2 greyColor text-right">Total: </div>
+                    <div className="col-2 font-weight-bold text-danger fontSizeLarge text-left">${this.state.cartList.reduce((sum,item)=>{
                         if (item.carts.status === 'checked')
                         return sum + parseInt(item.carts.count) * parseInt(item.productPrice)
                         return sum
@@ -143,8 +143,8 @@ class Cart extends Component {
 
 
                     <button className={this.state.checkoutCounter ? "col-2 btn btn-danger text-white" :"col-2 btn btn-secondary text-white"} disabled={!this.state.checkoutCounter}>
-                        <Link to='/address'>
-                            <div className='w-100'>
+                        <Link to='/address' className='text-decoration-none'>
+                            <div className='w-100 text-white font-weight-bold'>
                                 Checkout
                             </div>
                         </Link>
