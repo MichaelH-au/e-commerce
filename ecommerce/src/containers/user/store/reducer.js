@@ -3,6 +3,7 @@ import { LOGOUT } from "./constants";
 import { ADD_TO_CART } from "./constants";
 import { DELETE_CART_ITEM } from "./constants";
 import { CREATE_ORDER } from "./constants";
+import { ERROR_MSG } from "./constants";
 
 const defaultState = {
     isAuth:false,
@@ -34,6 +35,8 @@ export default (state = defaultState, action) => {
             return {...state, itemInCart: state.itemInCart - action.data}
         case LOGOUT:
             return {...defaultState}
+        case ERROR_MSG:
+            return {...state, errorMsg:action.msg}
         default:
             return state
     }

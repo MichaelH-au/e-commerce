@@ -140,8 +140,6 @@ class Cart extends Component {
                         return sum + parseInt(item.carts.count) * parseInt(item.productPrice)
                         return sum
                     }, 0)}</div>
-
-
                     <button className={this.state.checkoutCounter ? "col-2 btn btn-danger text-white" :"col-2 btn btn-secondary text-white"} disabled={!this.state.checkoutCounter}>
                         <Link to='/address' className='text-decoration-none'>
                             <div className='w-100 text-white font-weight-bold'>

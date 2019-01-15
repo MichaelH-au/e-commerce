@@ -25,11 +25,15 @@ class Login extends Component {
     render() {
         return (
             <div>
-                {this.props.isAuth ? <Redirect to='/'></Redirect>:null}
+                {this.props.user.isAuth ? <Redirect to='/'></Redirect>:null}
                 <div className='row justify-content-center p-0 mt-5 w-100 pb-5' >
                     <div className='col-lg-3'>
                         <img className='w-100 h-50 text-center mb-5' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBA4WRlfQj-vdSIMYpkEQ-pd3g286Cj_p08Xb54rEDrx3pPFmh" alt=""/>
                         {this.props.msg?<h6 style={{color:'red'}}>{this.props.msg}</h6>:null}
+                        {this.props.user.errorMsg ?
+                            <div className='errorBox fontSizeSmall'><img className='errorIcon' src={require('../../images/util/Invalid.png')} alt=""/>Invalid username or password</div>:
+                            null
+                        }
                         <label htmlFor="inputEmail" className="sr-only">Username</label>
                         <input  type='text' className="form-control mb-4" placeholder="Username" onChange={v=>this.handleChange('username',v)} required autoFocus/>
                         <label  className="sr-only">Password</label>
@@ -42,7 +46,7 @@ class Login extends Component {
     }
 }
 const mapStateToProps = (state)=>({
-    isAuth:state.user.isAuth
+    user:state.user
 })
 const actionCreators = { userLogin };
 export default connect(mapStateToProps, actionCreators)(Login);

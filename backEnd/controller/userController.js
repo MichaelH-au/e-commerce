@@ -24,7 +24,7 @@ module.exports = {
         });
     },
     login(req, res) {
-        models.user.find({
+        models.user.findOne({
             where: {
                 userName: req.body.username,
                 Password: req.body.password
@@ -38,8 +38,9 @@ module.exports = {
             }
         }).then(data => {
             console.log(data)
+            console.log('0------0')
             // console.log(data.products)
-            if (data) {
+            if (data.id) {
                 //TODO cookie
                 // res.cookie('userId', data.dataValues.id)
                 res.json({data: data})
