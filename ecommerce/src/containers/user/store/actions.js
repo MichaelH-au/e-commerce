@@ -29,8 +29,13 @@ function errorMsg(msg) {
 
 export function userLogin(username, password) {
     //TODO validation
+    if(!username) {
+        return dispatch=>dispatch(errorMsg('Username should not be empty'))
+    }
+    if(!password) {
+        return dispatch=>dispatch(errorMsg('Password should not be empty'))
+    }
     return dispatch=>{
-        console.log('-------------')
         axios.post('/api/users/login', {username, password})
             .then(res=>{
                 if (res.status === 200 && res.data.data) {

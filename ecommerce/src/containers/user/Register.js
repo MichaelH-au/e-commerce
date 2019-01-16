@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import { connect } from 'react-redux'
 import './user.css'
+import ErrorMessage from "../../components/ErrorMessage";
+import RegistSucc from '../../components/Modal/RegisterSucc'
+import $ from "jquery";
 
 class Register extends Component {
     constructor(props){
@@ -23,13 +27,22 @@ class Register extends Component {
     register(){
         const username = this.state.username
         const password = this.state.password
+        const confirmed_password = this.state.confirmed_password
         const role = this.state.role
         // const gender = this.state.gender
         // const address = this.state.address
         // const email = this.state.email
         // const birthday = this.state.birthday
         // const phone = this.state.phone
-
+        if(!username) {
+            return this.setState({errorMsg:'Username should not be empty'})
+        }
+        if(!password) {
+            return this.setState({errorMsg:'password should not be empty'})
+        }
+        if (password !== confirmed_password) {
+            return this.setState({errorMsg:'password and confirmed password should be same'})
+        }
 
         // this.props.userCreate({username, password, role, gender, address, email, linkedin, birthday, phone})
         axios.post('/api/users/register', {username, password, role})
@@ -37,7 +50,8 @@ class Register extends Component {
                 if (res.status === 200) {
                     //success
                     // console.log(res.data);
-                    alert('crete user successful')
+                    // alert('crete user successful')
+                    $('#registSucc').modal('show')
                 } else {
                     //error
                     // console.log(this.props)
@@ -59,10 +73,15 @@ class Register extends Component {
     render() {
         return (
             <div className='registerContainer'>
+                <RegistSucc modal_data='You have successfully register!'/>
                 <div className='container bg-white w-50 mt-5' >
                     <div className='font-weight-bold greyColor'>Create Account</div>
                     <hr/>
                     <div className='registerBox align-items-center text-left w-100 pt-5'>
+                        {this.state.errorMsg ?
+                            <ErrorMessage data={this.state.errorMsg}/>:
+                            <div className='p-3'></div>
+                        }
                         <div className='col-8'>
                             {/*Username:*/}
                             <input type="text" className="form-control" onChange={v=>this.handleChange('username',v)} placeholder="Username" required/>

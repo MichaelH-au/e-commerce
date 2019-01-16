@@ -5,7 +5,7 @@ import { addToCart } from "../user/store/actions";
 import { getProducts } from "./store/actions";
 import { updateProductList } from "./store/actions";
 import './Home.css'
-import AddToCart from '../../components/Modal/addCart'
+import AddToCart from '../../components/Modal/AddToCart'
 import $ from 'jquery';
 import NavBread from '../../components/NavBread/NavBread'
 import CateList from '../../components/CateList/CatList'
@@ -98,7 +98,7 @@ class Home extends Component {
     render() {
         return (
             <div className='home'>
-                <AddToCart/>
+                <AddToCart modal_body='You have added the product successfully!'/>
                 {/*<NavBread/>*/}
                 <div className="row justify-content-center p-0 m-0">
                     <div className="col-2 border border-info p-0">

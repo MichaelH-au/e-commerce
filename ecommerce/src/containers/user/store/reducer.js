@@ -28,11 +28,11 @@ export default (state = defaultState, action) => {
                 errorMsg: ''
             }
         case ADD_TO_CART:
-            return {...state, itemInCart: state.itemInCart + action.data}
+            return {...state, itemInCart: state.itemInCart + action.data,errorMsg: ''}
         case DELETE_CART_ITEM:
-            return {...state, itemInCart: state.itemInCart - 1}
+            return {...state, itemInCart: state.itemInCart - 1,errorMsg: ''}
         case CREATE_ORDER:
-            return {...state, itemInCart: state.itemInCart - action.data}
+            return {...state, itemInCart: state.itemInCart - action.data,errorMsg: ''}
         case LOGOUT:
             return {...defaultState}
         case ERROR_MSG:
