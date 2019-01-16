@@ -80,7 +80,7 @@ class Address extends Component {
     render() {
         return (
             <div>
-                {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
+                {!this.props.user.isAuth && !this.props.user.cookieFinish ? <Redirect to='/'></Redirect> : null}
 
                 <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -132,7 +132,7 @@ class Address extends Component {
                 </div>
                 <div className='row w-100 greyColor'>
                     {this.state.addressList.map((item, index) =>(
-                        <div className={`addressBox text-left flex-column pl-4  ${this.state.selectedAddress === item.id ? 'activeBorder' : ''}`} onClick={()=>this.handleChange('selectedAddress',item.id)} key={index}>
+                        <div className={`addressBox text-left flex-column pl-4 mb-3 ${this.state.selectedAddress === item.id ? 'activeBorder' : ''}`} onClick={()=>this.handleChange('selectedAddress',item.id)} key={index}>
                             <div className='mt-2 greyColor'>{item.contactName}</div>
                             <div className='mt-2 greyColor'>{item.address}</div>
                             <div className='mt-2 greyColor'>{item.postCode}</div>

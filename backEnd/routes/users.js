@@ -14,6 +14,10 @@ router.post('/login', function(req, res, next) {
     userController.login(req,res)
 })
 
+router.get('/userInfo', function(req, res, next) {
+    userController.user_info(req, res)
+})
+
 router.get('/cart', function(req, res, next) {
     userController.getCartItems(req, res)
 })

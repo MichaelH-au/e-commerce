@@ -15,7 +15,9 @@ class Cart extends Component {
             checkoutCounter:0
         }
     }
-    componentDidMount(){
+    componentWillMount(){
+
+        console.log(this.props.user)
         axios.get('/api/users/cart', {params:{user_id:this.props.user.id}})
             .then(res => {
                 let counter = 0;
@@ -92,7 +94,7 @@ class Cart extends Component {
         console.log(this.props.user)
         return (
             <div className='minHeight container cartListBox'>
-                {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
+                {!this.props.user.isAuth && !this.props.user.cookieFinish ? <Redirect to='/'></Redirect> : null}
                 <div className='row text-center mt-5 w-100 cartTitle p-2'>
                     <div className="col-4">Items</div>
                     <div className="col-2">Price</div>

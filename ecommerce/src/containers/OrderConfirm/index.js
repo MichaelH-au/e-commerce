@@ -51,7 +51,7 @@ class OrderConfirm extends Component {
     render() {
         return (
             <div className='pb-5'>
-                {!this.props.user.isAuth ? <Redirect to='/'></Redirect> : null}
+                {!this.props.user.isAuth && !this.props.user.cookieFinish ? <Redirect to='/'></Redirect> : null}
                 <div className="check-step">
                     <ul>
                         <li className="cur"><span>Confirm</span> address</li>

@@ -18,6 +18,7 @@ import Address from './containers/Address/Address'
 import OrderConfirm from './containers/OrderConfirm'
 import OrderCompleted from './containers/OrderCompleted/OrderCompleted'
 import Footer from './components/Footer/Footer'
+import AuthRoute from './components/AuthRoute'
 
 ReactDOM.render(
     <Provider store={store}>
@@ -25,6 +26,7 @@ ReactDOM.render(
             <div>
                 <Header/>
                 <NavBread/>
+                <AuthRoute></AuthRoute>
                 <Switch>
                     <Route path='/' exact component={Home}></Route>
                     <Route path='/register' exact component={Register}></Route>

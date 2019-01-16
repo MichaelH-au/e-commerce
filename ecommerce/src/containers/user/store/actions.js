@@ -51,6 +51,20 @@ export function userLogin(username, password) {
     }
 }
 
+export function getUserData() {
+    return dispatch=>{
+        axios.get('/api/users/userInfo')
+            .then(res=>{
+                if (res.status === 200 && res.data.data) {
+                    dispatch(loginSuccess(res.data.data))
+
+                } else {
+                    dispatch(errorMsg(res.data.error))
+                }
+            })
+    }
+}
+
 export function addToCart(user_id,product_id) {
     return dispatch => {
         axios.post('/api/products/addCart', {user_id,product_id,count:1})

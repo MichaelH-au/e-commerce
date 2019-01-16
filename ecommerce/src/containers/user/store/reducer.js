@@ -15,7 +15,8 @@ const defaultState = {
     email:'',
     address:'',
     phone:'',
-    itemInCart:0
+    itemInCart:0,
+    cookieFinish:'false'
 }
 export default (state = defaultState, action) => {
     switch (action.type) {
@@ -25,7 +26,8 @@ export default (state = defaultState, action) => {
                 ...action.payload,
                 itemInCart:parseInt(action.payload.products[0] ? action.payload.products[0].items:0),
                 isAuth: true,
-                errorMsg: ''
+                errorMsg: '',
+                cookieFinish:true
             }
         case ADD_TO_CART:
             return {...state, itemInCart: state.itemInCart + action.data,errorMsg: ''}

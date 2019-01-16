@@ -2,7 +2,6 @@ var models = require('../models')
 require('../src/js/utils/dateTransform')
 module.exports = {
     create_user(req, res) {
-
         //TODO validation and password encryption
         models.user.create({
             userName: req.body.username,
@@ -16,6 +15,8 @@ module.exports = {
         }).then(function (value) {
             if (value) {
                 console.log('success')
+                //TODO encryption
+                // res.cookie('userId', value.dataValues.id)
                 res.json({data: 'success'});
             }
         }).catch(function (reason) {
@@ -42,7 +43,7 @@ module.exports = {
             // console.log(data.products)
             if (data.id) {
                 //TODO cookie
-                // res.cookie('userId', data.dataValues.id)
+                res.cookie('userId', data.dataValues.id)
                 res.json({data: data})
             } else {
                 res.json({error: 'invalid username or password'})
@@ -52,6 +53,33 @@ module.exports = {
         })
 
     },
+    user_info(req, res){
+        const {userId} = req.cookies
+        console.log(userId)
+        if (!userId) {
+            res.json({error:'No cookie available'})
+        } else {
+            models.user.findOne({
+                where: {
+                    id: userId,
+                },
+                include: {
+                    model: models.product,
+                    attributes: [[models.sequelize.fn('COUNT', models.sequelize.col('productName')), 'items']],
+                }
+            }).then(data => {
+                if (data.id) {
+                    //TODO cookie
+                    res.cookie('userId', data.dataValues.id)
+                    res.json({data: data})
+                } else {
+                    res.json({error: 'invalid username or password'})
+                }
+            }).catch(error => {
+                console.log(error)
+            })
+        }
+    },
     getCartItems(req, res) {
         console.log(req.query)
         let param = {}
@@ -59,10 +87,11 @@ module.exports = {
             param.where = {status:'checked'}
             param.attributes = ['count', 'product_id', 'status', 'user_id']
         }
+        let {userId} = req.cookies
+        let where = {}
+        where.id = userId ? userId : req.query.user_id
         models.user.findOne({
-            where: {
-                id: req.query.user_id
-            },
+            where,
             include: {
                 model: models.product,
                 attributes: ['id', 'productName', 'imagePath', 'productPrice'],
@@ -88,8 +117,8 @@ module.exports = {
             param,
             {
                 where:{
-                    user_id:req.body.user_id,
-                    product_id:req.body.product_id
+                    product_id:req.body.product_id,
+                    user_id:req.body.user_id
                 }
             }
         ).then(value =>{
@@ -127,10 +156,11 @@ module.exports = {
     },
     getAddress(req, res) {
         console.log(req.query)
+        let {userId} = req.cookies
+        let where = {}
+        where.id = userId ? userId : req.query.user_id
         models.user.findOne({
-            where: {
-                id: req.query.user_id
-            },
+            where,
             attributes: ['id'],
             include: {
                 model: models.address,
