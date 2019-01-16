@@ -98,11 +98,22 @@ export function deleteFromCart(user_id, product_id) {
 }
 
 export function logout() {
-    return {type:LOGOUT}
+    return dispatch=>{
+        axios.get('/api/users/logout')
+            .then(res => {
+                if (res.status === 200) {
+                    //success
+                    dispatch({type:LOGOUT})
+                }
+                else {
+                    dispatch(errorMsg(res.data.error))
+                }
+            })
+    }
 }
 
 export function decreaseCart(data) {
-     return dispatch => {
-         dispatch(createOrderSuccess(data))
-     }
+    return dispatch => {
+        dispatch(createOrderSuccess(data))
+    }
 }

@@ -80,6 +80,15 @@ module.exports = {
             })
         }
     },
+    logout(req, res){
+        res.clearCookie("userId");
+        res.redirect('/')
+    },
+    /**
+     *-----------------------------------------------------------------------
+     * User cart functions
+     *-----------------------------------------------------------------------
+     * */
     getCartItems(req, res) {
         console.log(req.query)
         let param = {}
@@ -154,6 +163,11 @@ module.exports = {
             res.json({error})
         })
     },
+    /**
+     *-----------------------------------------------------------------------
+     * User address functions
+     *-----------------------------------------------------------------------
+     * */
     getAddress(req, res) {
         console.log(req.query)
         let {userId} = req.cookies
@@ -227,6 +241,11 @@ module.exports = {
             res.json({data:value})
         })
     },
+    /**
+     *-----------------------------------------------------------------------
+     * User order functions
+     *-----------------------------------------------------------------------
+     * */
     createOrder(req, res){
         let random1 = Math.floor(Math.random() * 10)
         let random2 = Math.floor(Math.random() * 10)
