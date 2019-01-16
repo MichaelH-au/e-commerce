@@ -76,7 +76,7 @@
     border: orange 3px dashed;
 }
 .addressBox:hover{
-    border: orange 3px solid;
+    border: orange 3px dashed;
 }
 .addAddressIcon{
     width: 50px;
@@ -87,5 +87,5 @@
 }
 .deleteAddressIcon{
     width: 30px;
-    height: 30;
+    height: 30px;
 }

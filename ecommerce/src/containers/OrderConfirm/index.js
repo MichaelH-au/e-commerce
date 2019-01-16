@@ -50,9 +50,9 @@ class OrderConfirm extends Component {
     }
     render() {
         return (
-            <div className='pb-5'>
+            <div className='pb-5 container'>
                 {!this.props.user.isAuth && !this.props.user.cookieFinish ? <Redirect to='/'></Redirect> : null}
-                <div className="check-step">
+                <div className="check-step ">
                     <ul>
                         <li className="cur"><span>Confirm</span> address</li>
                         <li className="cur"><span>View your</span> order</li>
@@ -64,18 +64,18 @@ class OrderConfirm extends Component {
                     <h2><span>Order Content</span></h2>
                 </div>
 
-                <div className='row text-center mt-2 bg-info text-white w-100'>
+                <div className='row text-center mt-2 cartTitle w-100 p-2'>
                     <div className="col-6">Order content</div>
                     <div className="col-2">Price</div>
                     <div className="col-2">Quantity</div>
                     <div className="col-2">Subtotal</div>
                 </div>
                 {this.state.cartList.map((item, index) =>(
-                    <div className='row text-center pt-4 cartItemList w-100 greyColor' key={index}>
+                    <div className='row text-center align-items-center cartItemList w-100 greyColor' key={index}>
                         <div className="col-6">
                             <div className='row justify-content-start align-items-center ml-5'>
                                 <img className='cartItemImage' src={item.imagePath} alt=""/>
-                                <div className='ml-2'>{item.productName}</div>
+                                <div className='ml-2 greyColor font-weight-bold'>{item.productName}</div>
                             </div>
 
                         </div>
@@ -85,7 +85,7 @@ class OrderConfirm extends Component {
                                 <div className='w-25 text-center mr-2' >{item.carts.count}</div>
                             </div>
                         </div>
-                        <div className="col-2">${parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
+                        <div className="col-2 font-weight-bold">${parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
                     </div>
                 ))}
                 <div className="row justify-content-end w-100">
