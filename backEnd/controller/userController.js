@@ -39,7 +39,7 @@ module.exports = {
             }
         }).then(data => {
             console.log(data)
-            console.log('0------0')
+            // console.log('0------0')
             // console.log(data.products)
             if (data.id) {
                 //TODO cookie
@@ -68,6 +68,7 @@ module.exports = {
                     attributes: [[models.sequelize.fn('COUNT', models.sequelize.col('productName')), 'items']],
                 }
             }).then(data => {
+                console.log(data)
                 if (data.id) {
                     //TODO cookie
                     res.cookie('userId', data.dataValues.id)
@@ -107,7 +108,7 @@ module.exports = {
                 through: param
             }
         }).then(value => {
-            console.log(value)
+            // console.log(value)
             res.json({data: value.products})
         }).catch(error => {
             console.log(error)

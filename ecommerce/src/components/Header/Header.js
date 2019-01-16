@@ -16,15 +16,18 @@ class Header extends Component {
                     </div>
                     <div className='col-11 text-right'>
                         {this.props.user.isAuth ?
-                            <div className="row justify-content-end">
+                            <div className="row justify-content-end greyColor">
                                 <div className='mr-3'>Hello {this.props.user.userName}</div>
+                                <Link to='/account' className='text-decoration-none greyColor'>
+                                    <div className='mr-3'>My Account</div>
+                                </Link>
                                 <Link to={'cart'} className='text-decoration-none greyColor'>
                                     <div className='cart mr-4'>
                                         <img className='cart' src={require('../../images/Header/cart.png')} alt=''/>
                                         <div className='itemCounter p-0'>{this.props.user.itemInCart}</div>
                                     </div>
                                 </Link>
-                                <div className='mr-5' onClick={this.props.logout}>Logout</div>
+                                <div className='mr-5 cursor' onClick={this.props.logout}>Logout</div>
                             </div> :
                             <div className="row justify-content-end">
                                 <Link to='/login' className='text-decoration-none greyColor'>

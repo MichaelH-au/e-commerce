@@ -59,7 +59,7 @@ export function getUserData() {
                     dispatch(loginSuccess(res.data.data))
 
                 } else {
-                    dispatch(errorMsg(res.data.error))
+                    // dispatch(errorMsg())
                 }
             })
     }

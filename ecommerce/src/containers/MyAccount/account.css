@@ -1,0 +1,9 @@
+.flexColumn{
+    display: flex;
+    flex-direction: column;
+}
+.accountList:hover{
+    color: #888888;
+    font-weight: bold;
+    transition: .5s;
+}
