@@ -112,23 +112,38 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className='container-fluid '>
-                    <div className='row justify-content-center mt-3 '>
+                    <div className='row justify-content-around mt-3 fontSizeSmall'>
                         {/*<div>Price range</div>*/}
-                        <div onClick={()=>this.handleChange('selectedPriceRange','all')} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange==='all'?'priceActive ':''}`}>All</div>
-
-                        {this.state.priceFilter.map((price, index) => (
-                            <div onClick={()=>this.handleChange('selectedPriceRange',index)} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange=== index?'priceActive ':''}`} key={index}>
-                                ${price.startPrice} - {price.endPrice}
+                        <div className='col-4'>
+                            <div className='row'>
+                                <div className='pl-2 pr-2 sortLabel'>Price range</div>
+                                <select name="sord" onChange={(v)=>this.handleChange('selectedPriceRange', v.target.value)}>
+                                    <option value="all">All</option>
+                                    {this.state.priceFilter.map((price, index) => (
+                                        <option value={index} key={index}>
+                                            ${price.startPrice} - {price.endPrice}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
-                        ))}
+                        </div>
+                        {/*<div onClick={()=>this.handleChange('selectedPriceRange','all')} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange==='all'?'priceActive ':''}`}>All</div>*/}
 
-                        <div className='col-2'>
-                            <span>sort by</span>
-                            <select name="sord" onChange={(v)=>this.sortChange(v)}>
-                                <option value="">Null</option>
-                                <option value="Highest">Highest</option>
-                                <option value="Lowest">Lowest</option>
-                            </select>
+                        {/*{this.state.priceFilter.map((price, index) => (*/}
+                            {/*<div onClick={()=>this.handleChange('selectedPriceRange',index)} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange=== index?'priceActive ':''}`} key={index}>*/}
+                                {/*${price.startPrice} - {price.endPrice}*/}
+                            {/*</div>*/}
+                        {/*))}*/}
+
+                        <div className='col-3'>
+                            <div className='row justify-content-end'>
+                                <div className='pl-2 pr-2 sortLabel'>Sort</div>
+                                <select name="sord" onChange={(v)=>this.sortChange(v)}>
+                                    <option value="">Default</option>
+                                    <option value="Highest">Highest</option>
+                                    <option value="Lowest">Lowest</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <ItemArea data={this.props.product.productList}/>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import axios from "axios";
 import './NavBread.css'
 
@@ -13,10 +14,10 @@ class NavBread extends Component {
         return (
             <div className=' bg-white'>
                 <div className='container'>
-                    <div className='row align-items-center'>
-                        <div className='col-3'>
+                    <div className='row align-items-center justify-content-center p-0'>
+                        <Link className='col-3 p-0' to='/'>
                             <img className='w-75' src={require('../../images/NavBread/logo.jpg')} alt=""/>
-                        </div>
+                        </Link>
                         <div className="col-6 p-0">
                             <input className='searchInput w-100' type="text" placeholder='Mac Pro'/>
                         </div>

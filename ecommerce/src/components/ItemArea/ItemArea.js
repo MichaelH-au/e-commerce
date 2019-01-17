@@ -27,10 +27,10 @@ class ItemArea extends Component {
                                 </div>
                                 <div className='card-footer'>
                                     <div className='text-center text-capitalize fontSizeLarge greyColor'>{item.productName}</div>
-                                    <div className="row border-top border-danger justify-content-between">
+                                    <div className="row border-top border-danger justify-content-between align-items-start p-0">
                                         <p className='itemPrice ml-3'>$ {item.productPrice}</p>
 
-                                        <button className='btn btn-danger col-3 w-50 p-0 fontSizeSmall' onClick={()=> this.props.user.isAuth ? this.addToCart(item.id) : this.props.history.push('login')}>Add to cart</button>
+                                        <button className='btn btn-danger col-4 p-1 fontSizeSmall' onClick={()=> this.props.user.isAuth ? this.addToCart(item.id) : this.props.history.push('login')}>Add to cart</button>
                                     </div>
                                 </div>
                             </div>

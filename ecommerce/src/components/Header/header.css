@@ -1,5 +1,5 @@
 .navBar{
-    height: 50px;
+    height: 35px;
     background-color: #F2F2F2;
 }
 
@@ -16,7 +16,7 @@
     position: relative;
 }
 .itemCounter{
-    background-color: gray;
+    background-color: #FFA500;
     border-radius: 15px;
     color: black;
     text-align: center;

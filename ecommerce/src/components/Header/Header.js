@@ -8,11 +8,11 @@ class Header extends Component {
         console.log(this.props.user)
         return (
             <div>
-                <div className="row align-items-center navBar m-0" >
+                <div className="row align-items-center navBar m-0 fontSizeSmall " >
                     <div className="col-1 mainIcon text-center">
-                        <Link to='/' className='text-decoration-none greyColor'>
-                            <div className='mr-5'>Home</div>
-                        </Link>
+                        {/*<Link to='/' className='text-decoration-none greyColor'>*/}
+                            {/*<div className='mr-5'>Home</div>*/}
+                        {/*</Link>*/}
                     </div>
                     <div className='col-11 text-right'>
                         {this.props.user.isAuth ?
