@@ -17,9 +17,9 @@ class ItemArea extends Component {
         return (
             <div>
                 <div className='itemArea pb-5'>
-                    <div className='row justify-content-start'>
+                    <div className='row justify-content-start p-0'>
                         {this.props.data.map((item, index) => (
-                            <div className='card p-0 mr-5 mt-2 productCards' key={index}>
+                            <div className='card p-0 mr-3 mt-2 productCards' key={index}>
                                 <div className='card-body p-0'>
                                     <div className='itemImage'>
                                         <img className='w-100 h-100' src={AWS_PRODUCT_IMAGE_PATH + item.imagePath} alt=''></img>

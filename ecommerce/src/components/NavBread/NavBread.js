@@ -17,19 +17,11 @@ class NavBread extends Component {
                         <div className='col-3'>
                             <img className='w-75' src={require('../../images/NavBread/logo.jpg')} alt=""/>
                         </div>
-                        {/*<div className='col-2 p-0'>*/}
-                            {/*<select className="custom-select" onChange={v=>this.handleChange('category',v.target.value)} required>*/}
-                                {/*<option value="">Category</option>*/}
-                                {/*{this.props.product.category.map((item, index)=>(*/}
-                                    {/*<option value={item} key={index}>{item}</option>*/}
-                                {/*))}*/}
-                            {/*</select>*/}
-                        {/*</div>*/}
                         <div className="col-6 p-0">
                             <input className='searchInput w-100' type="text" placeholder='Mac Pro'/>
                         </div>
                         <div className="col-1 p-0">
-                            <button className='btn btn-warning w-100 pt-2 ml-2 text-white'>Search</button>
+                            <button className='btn btn-warning w-100 pt-2 text-white searchButton'>Search</button>
                         </div>
                     </div>
                 </div>
