@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import $ from "jquery";
 import { addToCart } from "../../containers/user/store/actions";
 import { withRouter} from 'react-router-dom';
+import { AWS_PRODUCT_IMAGE_PATH } from "../../js/constants/path";
 
 class ItemArea extends Component {
     addToCart(id){
@@ -20,7 +21,7 @@ class ItemArea extends Component {
                             <div className='card p-0 mr-5 mt-2 productCards' key={index}>
                                 <div className='card-body p-0'>
                                     <div className='itemImage'>
-                                        <img className='w-100 h-100' src={item.imagePath} alt=''></img>
+                                        <img className='w-100 h-100' src={AWS_PRODUCT_IMAGE_PATH + item.imagePath} alt=''></img>
                                     </div>
                                 </div>
                                 <div className='card-footer'>

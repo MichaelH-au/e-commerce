@@ -1,0 +1,1 @@
+export const AWS_PRODUCT_IMAGE_PATH = 'https://s3-ap-southeast-2.amazonaws.com/michael-ecommerce/ecommerce/public/images/products/'
