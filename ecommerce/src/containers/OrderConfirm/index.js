@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { Redirect, Link } from 'react-router-dom'
 import {connect} from 'react-redux';
-import { decreaseCart } from "../user/store/actions";
 import axios from "axios";
+import { decreaseCart } from "../user/store/actions";
+import { AWS_PRODUCT_IMAGE_PATH } from "../../js/constants/path";
+import ConfirmList from '../../components/confirmList'
 
 class OrderConfirm extends Component {
     constructor(props){
@@ -70,24 +72,7 @@ class OrderConfirm extends Component {
                     <div className="col-2">Quantity</div>
                     <div className="col-2">Subtotal</div>
                 </div>
-                {this.state.cartList.map((item, index) =>(
-                    <div className='row text-center align-items-center cartItemList w-100 greyColor' key={index}>
-                        <div className="col-6">
-                            <div className='row justify-content-start align-items-center ml-5'>
-                                <img className='cartItemImage' src={item.imagePath} alt=""/>
-                                <div className='ml-2 greyColor font-weight-bold'>{item.productName}</div>
-                            </div>
-
-                        </div>
-                        <div className="col-2">${item.productPrice}</div>
-                        <div className="col-2">
-                            <div className='row justify-content-center'>
-                                <div className='w-25 text-center mr-2' >{item.carts.count}</div>
-                            </div>
-                        </div>
-                        <div className="col-2 font-weight-bold">${parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
-                    </div>
-                ))}
+                <ConfirmList data={this.state.cartList}/>
                 <div className="row justify-content-end w-100">
                     <div className="col-2 text-right greyColor">
                         <div>Item subtotal:</div>

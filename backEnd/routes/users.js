@@ -72,4 +72,7 @@ router.post('/address/create', function(req, res, next) {
 router.post('/order/create', function(req, res, next) {
     userController.createOrder(req,res)
 })
+router.get('/order', function(req, res, next) {
+    userController.getOrder(req,res)
+})
 module.exports = router;

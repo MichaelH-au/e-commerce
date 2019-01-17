@@ -3,10 +3,10 @@
     width: 50px;
 }
 .cartItemList{
-    background-color: white;
+    background-color: #F7F7F7;
     color: black;
-    border: 1px solid gainsboro;
-    margin-top: 10px;
+    border-bottom: 1px solid gainsboro;
+    /*margin-top: 10px;*/
     height: 80px;
 }
 .deleteIcon{

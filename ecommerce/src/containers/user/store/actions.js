@@ -5,6 +5,7 @@ import { ERROR_MSG } from "./constants";
 import { ADD_TO_CART } from "./constants";
 import { DELETE_CART_ITEM } from "./constants";
 import { CREATE_ORDER } from "./constants";
+import { GET_ORDERS } from "./constants";
 
 function loginSuccess(data) {
     return {type:LOGIN_SUCCESS, payload:data}
@@ -117,3 +118,28 @@ export function decreaseCart(data) {
         dispatch(createOrderSuccess(data))
     }
 }
+
+/**
+ * Actions for order
+ * */
+
+export function getOrders() {
+    return dispatch => {
+        axios.get('/api/users/order')
+            .then(res => {
+                if (res.status === 200) {
+                    //success
+                    // console.log('get order')
+                    let data = res.data.data
+                    data.forEach(order=>{
+                        order.orderInfo = JSON.parse(order.orderInfo)
+                    })
+                    dispatch({type:GET_ORDERS,data:data})
+                }
+                else {
+                    dispatch(errorMsg(res.data.error))
+                }
+            })
+    }
+}
+

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { Redirect, Link } from 'react-router-dom'
 import axios from "axios";
 import { deleteFromCart } from "../user/store/actions";
+import { AWS_PRODUCT_IMAGE_PATH } from "../../js/constants/path";
 import './cart.css'
 
 class Cart extends Component {
@@ -110,7 +111,7 @@ class Cart extends Component {
                                     <img className='checkBox' onClick={()=>this.checkboxHandler(index, 'checked', item.id)} src={require('../../images/Cart/check_box_outline_blank.png')} alt=""/> :
                                     <img className='checkBox' onClick={()=>this.checkboxHandler(index, 'pending', item.id)} src={require('../../images/Cart/check_box.png')} alt=""/>
                                 }
-                                <img className='cartItemImage' src={item.imagePath} alt=""/>
+                                <img className='cartItemImage' src={AWS_PRODUCT_IMAGE_PATH + item.imagePath} alt=""/>
                                 <div className='ml-2 greyColor font-weight-bold'>{item.productName}</div>
                             </div>
 

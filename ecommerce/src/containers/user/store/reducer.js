@@ -3,6 +3,7 @@ import { LOGOUT } from "./constants";
 import { ADD_TO_CART } from "./constants";
 import { DELETE_CART_ITEM } from "./constants";
 import { CREATE_ORDER } from "./constants";
+import { GET_ORDERS } from "./constants";
 import { ERROR_MSG } from "./constants";
 
 const defaultState = {
@@ -16,7 +17,8 @@ const defaultState = {
     address:'',
     phone:'',
     itemInCart:0,
-    cookieFinish:'false'
+    cookieFinish:'false',
+    orderList:[]
 }
 export default (state = defaultState, action) => {
     switch (action.type) {
@@ -35,6 +37,8 @@ export default (state = defaultState, action) => {
             return {...state, itemInCart: state.itemInCart - 1,errorMsg: ''}
         case CREATE_ORDER:
             return {...state, itemInCart: state.itemInCart - action.data,errorMsg: ''}
+        case GET_ORDERS:
+            return {...state, orderList: action.data}
         case LOGOUT:
             return {...defaultState}
         case ERROR_MSG:

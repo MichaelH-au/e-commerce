@@ -5,7 +5,7 @@ class MyInfo extends Component {
     render() {
         return (
             <div className='p-4'>
-                <div>My Details</div>
+                <div className='font-weight-bold'>My Details</div>
                 <hr/>
                 <div className="row mb-2">
                     <div className="col-2">Username:</div>

@@ -14,7 +14,7 @@ module.exports = {
             // Phone_number: req.body.phone,
         }).then(function (value) {
             if (value) {
-                console.log('success')
+                // console.log('success')
                 //TODO encryption
                 // res.cookie('userId', value.dataValues.id)
                 res.json({data: 'success'});
@@ -38,7 +38,7 @@ module.exports = {
                 // }
             }
         }).then(data => {
-            console.log(data)
+            // console.log(data)
             // console.log('0------0')
             // console.log(data.products)
             if (data.id) {
@@ -68,7 +68,7 @@ module.exports = {
                     attributes: [[models.sequelize.fn('COUNT', models.sequelize.col('productName')), 'items']],
                 }
             }).then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.id) {
                     //TODO cookie
                     res.cookie('userId', data.dataValues.id)
@@ -186,7 +186,7 @@ module.exports = {
                 // }
             }
         }).then(value => {
-            console.log(value.userInfo[0])
+            // console.log(value.userInfo[0])
             res.json({data: value.userInfo})
         }).catch(error => {
             console.log(error)
@@ -207,7 +207,7 @@ module.exports = {
             res.json({error})
             return
         }
-        console.log(req.body)
+        // console.log(req.body)
         try{
             await models.address.update({
                 isDefault :1
@@ -250,11 +250,11 @@ module.exports = {
     createOrder(req, res){
         let random1 = Math.floor(Math.random() * 10)
         let random2 = Math.floor(Math.random() * 10)
-        console.log('start')
+        // console.log('start')
         let sysDate = new Date().Format('yyyyMMddhhmmss')
-        console.log('start')
+        // console.log('start')
         let orderId = random1 + sysDate + random2;
-        console.log(req.body)
+        // console.log(req.body)
 
 
         return models.sequelize.transaction(function (t) {
@@ -275,12 +275,24 @@ module.exports = {
                         }
                     })
             }).then(value =>{
-                console.log(value)
+                // console.log(value)
             })
         }).then(result =>{
             res.json({data:{orderId, orderAmount:req.body.orderAmount}})
         }).catch(error =>{
             console.log(error)
+            res.json({error})
+        })
+    },
+    getOrder(req, res) {
+        let {userId} = req.cookies
+        models.order.findAll({
+            where:{
+                orderOwner:userId
+            }
+        }).then(value => {
+            res.json({data:value})
+        }).then(error=>{
             res.json({error})
         })
     }
