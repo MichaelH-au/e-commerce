@@ -2,6 +2,7 @@ import { CHANGE_CATE } from "./constants";
 import { GET_PRODUCTS } from "./constants";
 import { UPDATE_PRODUCT_LIST } from "./constants";
 import { PUSH_PRODUCT_LIST } from "./constants";
+import { CHANGE_SEARCHED_PRODUCT } from "./constants";
 
 const defaultState = {
     curCategory:'All',
@@ -16,7 +17,8 @@ const defaultState = {
         'Phones & Accessories',
         'Portable Audio & Headphones'
     ],
-    productList:[]
+    productList:[],
+    searchedProduct:''
 }
 export default (state = defaultState, action) => {
     switch (action.type) {
@@ -28,6 +30,8 @@ export default (state = defaultState, action) => {
             return {...state, productList: [...state.productList, ...action.data]}
         case UPDATE_PRODUCT_LIST:
             return {...state, productList: action.data}
+        case CHANGE_SEARCHED_PRODUCT:
+            return {...state, searchedProduct: action.data}
         default:
             return state
     }

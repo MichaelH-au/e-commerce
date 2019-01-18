@@ -4,17 +4,4 @@
     border-bottom-left-radius: 25px;
     border-top-left-radius: 25px;
 }
-.searchInput::-webkit-input-placeholder {
-    padding-left: 20px;
-}
-.searchInput:-moz-placeholder {
-    padding-left: 20px;
-}
-.searchInput:-ms-input-placeholder {
-    padding-left: 20px;
-}
 
-.searchButton{
-    border-bottom-right-radius: 25px;
-    border-top-right-radius: 25px;
-}

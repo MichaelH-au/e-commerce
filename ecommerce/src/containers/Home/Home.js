@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { addToCart } from "../user/store/actions";
 import { getProducts } from "./store/actions";
 import { updateProductList } from "./store/actions";
+import { changeSearchedProduct } from "./store/actions";
 import './Home.css'
 import AddToCart from '../../components/Modal/AddToCart'
 import $ from 'jquery';
@@ -51,7 +52,11 @@ class Home extends Component {
             this.setState({
                 itemLoading:true
             })
-            axios.get('/api/products', {params:{offset:this.state.itemOffset,limit:4,selectedRange:this.state.selectedPriceRange},})
+            let url = this.props.product.searchedProduct ? '/api/products/search' :'/api/products';
+            let params = {offset:this.state.itemOffset,limit:4,selectedRange:this.state.selectedPriceRange}
+            if (this.props.product.searchedProduct)
+                params.keyword = this.props.searchProducts
+            axios.get(url, {params})
                 .then(res => {
                     if (res.data.result.length < 4) {
                         if (res.data.result.length > 0){
@@ -81,7 +86,7 @@ class Home extends Component {
         this.setState({
             [key]:value
         })
-        this.props.getProducts(value)
+        this.props.getProducts(value, this.props.product.curCategory)
     }
     sortChange(e){
         let list = this.props.product.productList;
@@ -94,7 +99,10 @@ class Home extends Component {
         });
         this.props.updateProductList('update',list)
     }
-
+    cancelSearch(){
+        this.props.changeSearchedProduct('')
+        this.props.getProducts(this.state.selectedPriceRange)
+    }
     render() {
         return (
             <div className='home'>
@@ -130,9 +138,9 @@ class Home extends Component {
                         {/*<div onClick={()=>this.handleChange('selectedPriceRange','all')} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange==='all'?'priceActive ':''}`}>All</div>*/}
 
                         {/*{this.state.priceFilter.map((price, index) => (*/}
-                            {/*<div onClick={()=>this.handleChange('selectedPriceRange',index)} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange=== index?'priceActive ':''}`} key={index}>*/}
-                                {/*${price.startPrice} - {price.endPrice}*/}
-                            {/*</div>*/}
+                        {/*<div onClick={()=>this.handleChange('selectedPriceRange',index)} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange=== index?'priceActive ':''}`} key={index}>*/}
+                        {/*${price.startPrice} - {price.endPrice}*/}
+                        {/*</div>*/}
                         {/*))}*/}
 
                         <div className='col-3'>
@@ -146,6 +154,23 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
+                    {this.props.product.searchedProduct ?
+                        <div className='container bg-white'>
+                            <div className='row'>
+                                <div>Search:</div>
+                                <div className='ml-4 btn btn-outline-info p-0 pr-2' onClick={()=>this.cancelSearch()}>
+                                    <div className='row align-items-center justify-content-around'>
+                                        <div className='col-4 mr-2'>
+                                            {this.props.product.searchedProduct}
+                                        </div>
+                                        <div className='col-2'>x</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        null
+                    }
                     <ItemArea data={this.props.product.productList}/>
                 </div>
             </div>
@@ -156,5 +181,5 @@ const mapStateToProps = state => ({
     user:state.user,
     product:state.product
 })
-const actionCreators = { addToCart, getProducts, updateProductList }
+const actionCreators = { addToCart, getProducts, updateProductList, changeSearchedProduct }
 export default connect(mapStateToProps, actionCreators)(Home)

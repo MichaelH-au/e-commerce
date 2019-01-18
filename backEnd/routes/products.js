@@ -8,6 +8,9 @@ router.get('/', function(req, res, next) {
     productController.getProducts(req,res)
 })
 
+router.get('/search', function(req, res, next) {
+    productController.searchProduct(req,res)
+})
 
 router.post('/addCart', function(req, res, next) {
     productController.addToCart(req,res)
