@@ -13,7 +13,6 @@ class ItemArea extends Component {
         $('#addToCart').modal('show')
     }
     render() {
-        console.log(this.props.user)
         return (
             <div>
                 <div className='itemArea pb-5'>
