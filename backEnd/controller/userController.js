@@ -292,7 +292,29 @@ module.exports = {
             }
         }).then(value => {
             res.json({data:value})
-        }).then(error=>{
+        }).catch(error=>{
+            res.json({error})
+        })
+    },
+    updatePassword(req, res) {
+        let {userId} = req.cookies
+        models.user.update(
+            {
+                Password:req.body.newPassword
+            },
+            {
+                where:{
+                    id:userId,
+                    Password:req.body.currPassword
+
+                }
+            }).then(value=>{
+                if (value){
+                    res.json({status:'succ'})
+                } else {
+                    res.json({error:'Invalid current password!'})
+                }
+        }).catch(error=>{
             res.json({error})
         })
     }

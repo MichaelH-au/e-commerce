@@ -38,11 +38,12 @@ module.exports = {
             }
         } else if (category){
             param.where = {category}
-
         }
-        // console.log(param)
+        console.log(param)
         models.product.findAll(param).then(values =>{
             res.json({status:0, msg:'', result:values})
+        }).catch(error=>{
+            res.json({error})
         })
 
     },

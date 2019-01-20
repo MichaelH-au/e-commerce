@@ -25,6 +25,9 @@ router.get('/userInfo', function(req, res, next) {
     userController.user_info(req, res)
 })
 
+router.post('/update/password', function(req, res, next) {
+    userController.updatePassword(req,res)
+})
 
 /**
  * router with user'cart
