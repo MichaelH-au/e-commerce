@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './account.css'
-import UserInfo from '../../components/MyInfo'
-import OrderList from '../../components/OrderList'
-import ChangePassword from '../../components/ChangePassword'
+import UserInfo from './subpages/MyInfo'
+import OrderList from './subpages/OrderList'
+import ChangePassword from './subpages/ChangePassword'
 
 class MyAccount extends Component {
     constructor(props){
@@ -25,7 +25,11 @@ class MyAccount extends Component {
                     <div className='row justify-content-center'>
                         <div className="col-2    align-items-start ml-5 flexColumn greyColor">
                             {this.state.infoList.map((item, index)=>(
-                                <div className='accountList cursor mb-2' key={index} onClick={()=>this.handlerChanges('listIndex',index)}>{item}</div>
+                                <div className='accountList cursor mb-2' key={index}
+                                     onClick={()=>this.handlerChanges('listIndex',index)}
+                                >
+                                    {item}
+                                </div>
                             ))}
                         </div>
                         <div className="col-9 bg-white greyColor fontSizeSmall">

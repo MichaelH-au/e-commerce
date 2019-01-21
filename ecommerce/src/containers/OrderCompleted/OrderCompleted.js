@@ -24,7 +24,11 @@ class OrderCompleted extends Component {
                             <div className="col">Order Amount: {this.props.location.state.orderAmount}</div>
                         </div>
                         <div className='row justify-content-around'>
-                            <button className='col-5 p-2 btn btn-outline-success' onClick={()=>this.props.history.push('cart')}>Cart List</button>
+                            <button className='col-5 p-2 btn btn-outline-success'
+                                    onClick={()=>this.props.history.push('cart')}
+                            >
+                                Cart List
+                            </button>
                             <button className='col-5 p-2 btn btn-outline-info'>Order List</button>
                         </div>
 

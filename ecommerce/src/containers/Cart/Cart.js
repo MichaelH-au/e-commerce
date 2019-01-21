@@ -95,7 +95,12 @@ class Cart extends Component {
         console.log(this.props.user)
         return (
             <div className='minHeight container cartListBox'>
-                {!this.props.user.isAuth && !this.props.user.cookieFinish ? <Redirect to='/'></Redirect> : null}
+                {!this.props.user.isAuth && !this.props.user.cookieFinish
+                    ?
+                    <Redirect to='/'></Redirect>
+                    :
+                    null
+                }
                 <div className='row text-center mt-5 w-100 cartTitle p-2'>
                     <div className="col-4">Items</div>
                     <div className="col-2">Price</div>
@@ -107,9 +112,15 @@ class Cart extends Component {
                     <div className='row align-items-center text-center cartItemList w-100 greyColor' key={index}>
                         <div className="col-4">
                             <div className='row justify-content-start align-items-center'>
-                                {item.carts.status === 'pending' ?
-                                    <img className='checkBox' onClick={()=>this.checkboxHandler(index, 'checked', item.id)} src={require('../../images/Cart/check_box_outline_blank.png')} alt=""/> :
-                                    <img className='checkBox' onClick={()=>this.checkboxHandler(index, 'pending', item.id)} src={require('../../images/Cart/check_box.png')} alt=""/>
+                                {item.carts.status === 'pending'
+                                    ?
+                                    <img className='checkBox'
+                                         onClick={()=>this.checkboxHandler(index, 'checked', item.id)}
+                                         src={require('../../images/Cart/check_box_outline_blank.png')} alt=""/>
+                                    :
+                                    <img className='checkBox'
+                                         onClick={()=>this.checkboxHandler(index, 'pending', item.id)}
+                                         src={require('../../images/Cart/check_box.png')} alt=""/>
                                 }
                                 <img className='cartItemImage' src={AWS_PRODUCT_IMAGE_PATH + item.imagePath} alt=""/>
                                 <div className='ml-2 greyColor font-weight-bold'>{item.productName}</div>
@@ -119,21 +130,30 @@ class Cart extends Component {
                         <div className="col-2">${item.productPrice}</div>
                         <div className="col-2">
                             <div className='row justify-content-center align-items-center'>
-                                <button className='btn mr-2 btn-light countButton p-0' onClick={()=>this.countChange(index,parseInt(item.carts.count) - 1, item.id)}>-</button>
-                                <input className='w-25 text-center mr-2' type="text" value={item.carts.count} onChange={(e)=>this.countChange(index,e.target.value, item.id)}/>
-                                <button className='btn btn-light countButton p-0' onClick={()=>this.countChange(index,parseInt(item.carts.count) + 1, item.id)}>+</button>
+                                <button className='btn mr-2 btn-light countButton p-0'
+                                        onClick={()=>this.countChange(index,parseInt(item.carts.count) - 1, item.id)}>-</button>
+                                <input className='w-25 text-center mr-2' type="text" value={item.carts.count}
+                                       onChange={(e)=>this.countChange(index,e.target.value, item.id)}/>
+                                <button className='btn btn-light countButton p-0'
+                                        onClick={()=>this.countChange(index,parseInt(item.carts.count) + 1, item.id)}>+</button>
 
                             </div>
                         </div>
                         <div className="col-2 font-weight-bold">${parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
-                        <div className="col-2" onClick={()=>this.deleteItem(item.id, index)}><img className='deleteIcon' src={require('../../images/Cart/trash.png')} alt=""/></div>
+                        <div className="col-2" onClick={()=>this.deleteItem(item.id, index)}>
+                            <img className='deleteIcon' src={require('../../images/Cart/trash.png')} alt=""/>
+                        </div>
                     </div>
                 ))}
                 <div className='row text-center mt-5 cartTitle text-white align-items-center w-100 p-0'>
                     <div className="col-6 greyColor text-left">
-                        {!this.state.selectAll ?
-                            <img className='checkBox border-dark' onClick={() => this.selectAll()}  src={require('../../images/Cart/check-box-blank.png')} alt=""/> :
-                            <img className='checkBox bg-white' onClick={() => this.selectAll()} src={require('../../images/Cart/check_box.png')} alt=""/>
+                        {!this.state.selectAll
+                            ?
+                            <img className='checkBox border-dark'
+                                 onClick={() => this.selectAll()}  src={require('../../images/Cart/check-box-blank.png')} alt=""/>
+                            :
+                            <img className='checkBox bg-white'
+                                 onClick={() => this.selectAll()} src={require('../../images/Cart/check_box.png')} alt=""/>
                         }
                         Select All
                     </div>
@@ -143,7 +163,8 @@ class Cart extends Component {
                         return sum + parseInt(item.carts.count) * parseInt(item.productPrice)
                         return sum
                     }, 0)}</div>
-                    <button className={this.state.checkoutCounter ? "col-2 btn btn-danger text-white" :"col-2 btn btn-secondary text-white"} disabled={!this.state.checkoutCounter}>
+                    <button className={this.state.checkoutCounter ? "col-2 btn btn-danger text-white" :"col-2 btn btn-secondary text-white"}
+                            disabled={!this.state.checkoutCounter}>
                         <Link to='/address' className='text-decoration-none'>
                             <div className='w-100 text-white font-weight-bold'>
                                 Checkout

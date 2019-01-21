@@ -29,7 +29,11 @@ class ItemArea extends Component {
                                     <div className="row border-top border-danger justify-content-between align-items-start p-0">
                                         <p className='itemPrice ml-3'>$ {item.productPrice}</p>
 
-                                        <button className='btn btn-danger col-4 p-1 fontSizeSmall' onClick={()=> this.props.user.isAuth ? this.addToCart(item.id) : this.props.history.push('login')}>Add to cart</button>
+                                        <button className='btn btn-danger col-4 p-1 fontSizeSmall'
+                                                onClick={()=> this.props.user.isAuth
+                                                    ? this.addToCart(item.id)
+                                                    : this.props.history.push('login')}
+                                        >Add to cart</button>
                                     </div>
                                 </div>
                             </div>

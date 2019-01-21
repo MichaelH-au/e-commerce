@@ -9,9 +9,9 @@ import './Home.css'
 import AddToCart from '../../components/Modal/AddToCart'
 import $ from 'jquery';
 import NavBread from '../../components/NavBread/NavBread'
-import CateList from '../../components/CateList/CatList'
+import CateList from './subpages/CateList/CatList'
 import Carousel from '../../components/Carousel/Carousel'
-import Advertise from '../../components/Advertisement/Advertise'
+import Advertise from './subpages/Advertisement/Advertise'
 import ItemArea from '../../components/ItemArea/ItemArea'
 
 class Home extends Component {
@@ -135,13 +135,6 @@ class Home extends Component {
                                 </select>
                             </div>
                         </div>
-                        {/*<div onClick={()=>this.handleChange('selectedPriceRange','all')} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange==='all'?'priceActive ':''}`}>All</div>*/}
-
-                        {/*{this.state.priceFilter.map((price, index) => (*/}
-                        {/*<div onClick={()=>this.handleChange('selectedPriceRange',index)} className={`cursor col-2 text-center h-100 align-items-center ${this.state.selectedPriceRange=== index?'priceActive ':''}`} key={index}>*/}
-                        {/*${price.startPrice} - {price.endPrice}*/}
-                        {/*</div>*/}
-                        {/*))}*/}
 
                         <div className='col-3'>
                             <div className='row justify-content-end'>
@@ -154,7 +147,8 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                    {this.props.product.searchedProduct ?
+                    {this.props.product.searchedProduct
+                        ?
                         <div className='container bg-white'>
                             <div className='row'>
                                 <div>Search:</div>

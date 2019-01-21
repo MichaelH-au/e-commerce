@@ -15,7 +15,8 @@ class Header extends Component {
                         {/*</Link>*/}
                     </div>
                     <div className='col-11 text-right'>
-                        {this.props.user.isAuth ?
+                        {this.props.user.isAuth
+                            ?
                             <div className="row justify-content-end greyColor">
                                 <div className='mr-3'>Hello {this.props.user.userName}</div>
                                 <Link to='/account' className='text-decoration-none greyColor'>
@@ -28,7 +29,8 @@ class Header extends Component {
                                     </div>
                                 </Link>
                                 <div className='mr-5 cursor' onClick={this.props.logout}>Logout</div>
-                            </div> :
+                            </div>
+                            :
                             <div className="row justify-content-end">
                                 <Link to='/login' className='text-decoration-none greyColor'>
                                     <div className='mr-5'>Login</div>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios'
-import ErrorMessage from '../../components/ErrorMessage'
+import ErrorMessage from '../../../../components/ErrorMessage/index'
 
 class Index extends Component {
     constructor(props) {

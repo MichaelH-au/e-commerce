@@ -18,7 +18,7 @@ import Address from './containers/Address/Address'
 import OrderConfirm from './containers/OrderConfirm'
 import OrderCompleted from './containers/OrderCompleted/OrderCompleted'
 import Footer from './components/Footer/Footer'
-import AuthRoute from './components/AuthRoute'
+import AuthRoute from './containers/AuthRoute'
 import Account from './containers/MyAccount'
 
 ReactDOM.render(

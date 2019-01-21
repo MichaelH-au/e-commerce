@@ -95,19 +95,27 @@ class Address extends Component {
                             <div className="modal-body">
                                 <div className='col-5'>
                                     <label>Contact Name</label>
-                                    <input type="text" className="form-control" onChange={v=>this.handleChange('contactName',v.target.value)} placeholder="Nick" required/>
+                                    <input type="text" className="form-control"
+                                           onChange={v=>this.handleChange('contactName',v.target.value)}
+                                           placeholder="Nick" required/>
                                 </div>
                                 <div className='col-5'>
                                     <label>Contact Number</label>
-                                    <input type="text" className="form-control" onChange={v=>this.handleChange('phoneNumber',v.target.value)} placeholder="0414978789" required/>
+                                    <input type="text" className="form-control"
+                                           onChange={v=>this.handleChange('phoneNumber',v.target.value)}
+                                           placeholder="0414978789" required/>
                                 </div>
                                 <div className='col-5'>
                                     <label>Postcode</label>
-                                    <input type="text" className="form-control" onChange={v=>this.handleChange('postCode',v.target.value)} placeholder="2000" required/>
+                                    <input type="text" className="form-control"
+                                           onChange={v=>this.handleChange('postCode',v.target.value)}
+                                           placeholder="2000" required/>
                                 </div>
                                 <div className='col-7'>
                                     <label>Address</label>
-                                    <input type="text" className="form-control" onChange={v=>this.handleChange('address',v.target.value)} placeholder="UNSW Sydney" required/>
+                                    <input type="text" className="form-control"
+                                           onChange={v=>this.handleChange('address',v.target.value)}
+                                           placeholder="UNSW Sydney" required/>
                                 </div>
                             </div>
                             <div className="modal-footer">
@@ -132,14 +140,18 @@ class Address extends Component {
                 </div>
                 <div className='row w-100 greyColor'>
                     {this.state.addressList.map((item, index) =>(
-                        <div className={`addressBox text-left flex-column pl-4 mb-3 ${this.state.selectedAddress === item.id ? 'activeBorder' : ''}`} onClick={()=>this.handleChange('selectedAddress',item.id)} key={index}>
+                        <div className={`addressBox text-left flex-column pl-4 mb-3 ${this.state.selectedAddress === item.id ? 'activeBorder' : ''}`}
+                             onClick={()=>this.handleChange('selectedAddress',item.id)} key={index}
+                        >
                             <div className='mt-2 greyColor'>{item.contactName}</div>
                             <div className='mt-2 greyColor'>{item.address}</div>
                             <div className='mt-2 greyColor'>{item.postCode}</div>
                             <div className='mt-2 greyColor'>{item.phoneNumber}</div>
                             <div className="row justify-content-around mt-2">
-                                {item.isDefault ?
-                                    <div className='text-warning'>default address</div> :
+                                {item.isDefault
+                                    ?
+                                    <div className='text-warning'>default address</div>
+                                    :
                                     <div className='text-warning' onClick={()=>this.setDefaultAddress(item.id)}>set address</div>
                                 }
                                 <img className='deleteIcon' onClick={()=>this.deleteAddress(item.id, index)} src={require("../../images/Cart/trash.png")} alt=""/>
