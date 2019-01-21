@@ -6,3 +6,5 @@ backEnd/\.idea/
 backEnd/node_modules/
 
 backEnd/\.env
+
+node_modules/

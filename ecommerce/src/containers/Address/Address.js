@@ -4,10 +4,12 @@ import {connect} from 'react-redux';
 import './Address.css'
 import $ from 'jquery';
 import axios from "axios";
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 class Address extends Component {
     constructor(props) {
         super(props)
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
         this.state = {
             addressList:[],
             selectedAddress:null,
