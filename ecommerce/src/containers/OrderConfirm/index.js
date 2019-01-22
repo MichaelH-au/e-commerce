@@ -3,7 +3,6 @@ import { Redirect, Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import axios from "axios";
 import { decreaseCart } from "../user/store/actions";
-import { AWS_PRODUCT_IMAGE_PATH } from "../../js/constants/path";
 import ConfirmList from '../../components/confirmList'
 
 class OrderConfirm extends Component {

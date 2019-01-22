@@ -15,7 +15,7 @@ export function getProducts(selectedPriceRange, category) {
     return dispatch => {
         axios.get('/api/products', {params:{offset:0,limit:8,selectedRange:selectedPriceRange, category}})
             .then(res => {
-                console.log(res.data.result)
+                // console.log(res.data.result)
                 dispatch({type:GET_PRODUCTS, data:res.data.result})
             })
     }

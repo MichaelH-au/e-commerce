@@ -9,7 +9,7 @@ class OrderList  extends Component {
     }
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <div className='p-4'>
                     <div className='font-weight-bold'>My Order</div>
                     <hr/>
@@ -34,7 +34,7 @@ class OrderList  extends Component {
                         </div>
                     ))}
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

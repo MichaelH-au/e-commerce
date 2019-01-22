@@ -4,11 +4,9 @@ import {connect} from 'react-redux';
 class ErrorMsg extends Component {
     render() {
         return (
-            <div>
-                <div className='errorBox fontSizeSmall'>
-                    <img className='errorIcon' src={require('../../images/util/Invalid.png')} alt=""/>
-                    {this.props.data}
-                </div>
+            <div className='errorBox fontSizeSmall'>
+                <img className='errorIcon' src={require('../../images/util/Invalid.png')} alt=""/>
+                {this.props.data}
             </div>
         );
     }

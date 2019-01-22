@@ -32,7 +32,6 @@ class Index extends Component {
     }
     render() {
         return (
-            <div>
                 <div className='p-4'>
                     <div className='font-weight-bold'>Change password</div>
                     <hr/>
@@ -66,7 +65,6 @@ class Index extends Component {
 
                     <button className='btn btn-outline-info mt-3 p-0 pl-2 pr-2' onClick={()=>this.changePassword()}>Submit</button>
                 </div>
-            </div>
         );
     }
 }

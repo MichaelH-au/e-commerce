@@ -9,7 +9,7 @@ class AuthRoute extends Component{
         this.props.getUserData()
     }
     render(){
-        return (null)
+        return (<React.Fragment></React.Fragment>)
     }
 }
 

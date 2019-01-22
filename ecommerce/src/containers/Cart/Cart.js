@@ -18,7 +18,6 @@ class Cart extends Component {
     }
     componentWillMount(){
 
-        console.log(this.props.user)
         axios.get('/api/users/cart', {params:{user_id:this.props.user.id}})
             .then(res => {
                 let counter = 0;
@@ -35,7 +34,6 @@ class Cart extends Component {
                     checkoutCounter:counter,
                     selectAll
                 })
-                console.log(this.state.cartList)
             })
     }
     countChange(index, value, product_id) {
@@ -47,7 +45,6 @@ class Cart extends Component {
             })
             axios.post('/api/users/cart/update', {user_id:this.props.user.id, product_id, count:value})
                 .then(res => {
-                    console.log(res.data)
                 })
         }
     }
@@ -61,11 +58,9 @@ class Cart extends Component {
         })
         axios.post('/api/users/cart/update', {user_id:this.props.user.id, product_id, status:value})
             .then(res => {
-                console.log(res.data)
             })
     }
     deleteItem(product_id, index){
-        console.log(product_id)
         this.props.deleteFromCart(this.props.user.id,product_id)
         let list = this.state.cartList
         list.splice(index,1)
@@ -83,7 +78,6 @@ class Cart extends Component {
         let count = this.state.selectAll ? 0 :this.state.cartList.length
         axios.post('/api/users/cart/selectAll', {user_id:this.props.user.id, selectAll:!this.state.selectAll})
             .then(res => {
-                console.log(res.data)
             })
         this.setState({
             cartList:list,
@@ -92,7 +86,6 @@ class Cart extends Component {
         })
     }
     render() {
-        console.log(this.props.user)
         return (
             <div className='minHeight container cartListBox'>
                 {!this.props.user.isAuth && !this.props.user.cookieFinish

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import { connect } from 'react-redux'
 import './user.css'
 import ErrorMessage from "../../components/ErrorMessage";
 import RegistSucc from '../../components/Modal/RegisterSucc'

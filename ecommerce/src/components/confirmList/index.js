@@ -4,7 +4,7 @@ import {AWS_PRODUCT_IMAGE_PATH} from "../../js/constants/path";
 class ComfirmList extends Component {
     render() {
         return (
-            <div className=''>
+            <React.Fragment>
                 {this.props.data.map((item, index) =>(
                     <div className='row text-center align-items-center cartItemList w-100 greyColor' key={index}>
                         <div className="col-6">
@@ -23,7 +23,7 @@ class ComfirmList extends Component {
                         <div className="col-2 font-weight-bold">${parseInt(item.carts.count) * parseInt(item.productPrice)}</div>
                     </div>
                 ))}
-            </div>
+            </React.Fragment>
         );
     }
 }

@@ -7,8 +7,6 @@ import { updateProductList } from "./store/actions";
 import { changeSearchedProduct } from "./store/actions";
 import './Home.css'
 import AddToCart from '../../components/Modal/AddToCart'
-import $ from 'jquery';
-import NavBread from '../../components/NavBread/NavBread'
 import CateList from './subpages/CateList/CatList'
 import Carousel from '../../components/Carousel/Carousel'
 import Advertise from './subpages/Advertisement/Advertise'
