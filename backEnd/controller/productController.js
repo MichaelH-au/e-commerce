@@ -9,7 +9,8 @@ module.exports = {
         let priceLte = ''
         let param = {
             offset:offset,
-            limit:limit
+            limit:limit,
+            logging:true
         }
         if (selectedRange != 'all') {
             switch (selectedRange) {
@@ -28,18 +29,18 @@ module.exports = {
                 default:
                     break;
             }
+            console.log(priceGr,priceLte)
             param.where = {
                 productPrice:{
                     [models.Sequelize.Op.between]: [priceGr, priceLte]
                 }
             }
-            if (category) {
+            if (category != 'All') {
                 param.where.category = category
             }
         } else if (category){
             param.where = {category}
         }
-        console.log(param)
         models.product.findAll(param).then(values =>{
             res.json({status:0, msg:'', result:values})
         }).catch(error=>{
