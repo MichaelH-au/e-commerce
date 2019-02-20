@@ -29,7 +29,7 @@ class NavBread extends Component {
             <div className=' bg-white'>
                 <div className='container'>
                     <div className='row align-items-center justify-content-center p-0'>
-                        <Link className='col-3 p-0' to='/' onClick={() => this.props.getProducts('all')}>
+                        <Link className='col-3 p-0' to='/' onClick={() => window.href('/')}>
                             <img className='w-75' src={require('../../images/NavBread/logo.jpg')} alt=""/>
                         </Link>
                         <div className="col-6 p-0">

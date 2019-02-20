@@ -106,6 +106,7 @@ class Home extends Component {
             itemLoading:false,
         })
     }
+
     render() {
         return (
             <div className='home'>
