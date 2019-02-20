@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { searchProducts } from "../../containers/Home/store/actions";
 import { changeSearchedProduct } from "../../containers/Home/store/actions";
+import { getProducts } from "../../containers/Home/store/actions";
 import './NavBread.css'
 
 class NavBread extends Component {
@@ -28,7 +29,7 @@ class NavBread extends Component {
             <div className=' bg-white'>
                 <div className='container'>
                     <div className='row align-items-center justify-content-center p-0'>
-                        <Link className='col-3 p-0' to='/'>
+                        <Link className='col-3 p-0' to='/' onClick={() => this.props.getProducts('all')}>
                             <img className='w-75' src={require('../../images/NavBread/logo.jpg')} alt=""/>
                         </Link>
                         <div className="col-6 p-0">
@@ -48,6 +49,6 @@ class NavBread extends Component {
 const mapStateToProps = state => ({
     product:state.product
 })
-const actionCreator = { searchProducts, changeSearchedProduct }
+const actionCreator = { searchProducts, changeSearchedProduct, getProducts }
 
 export default connect(mapStateToProps, actionCreator)(NavBread);
