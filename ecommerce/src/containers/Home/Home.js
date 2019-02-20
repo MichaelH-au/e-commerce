@@ -163,7 +163,13 @@ class Home extends Component {
                         :
                         null
                     }
-                    <ItemArea data={this.props.product.productList}/>
+                    {this.props.product.productList.length
+                        ?<ItemArea data={this.props.product.productList}/>
+                        :<div className='text-center'>
+                            <div className='p-5 greyColor fontSizeLarge '>Sorry cannot find result!</div>
+                            <img className='w-25 mb-5' src={require('../../images/Home/img-no-cartitems.png')} alt=""/>
+                        </div>
+                    }
                 </div>
             </div>
         );
