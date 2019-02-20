@@ -147,15 +147,18 @@ class Home extends Component {
                     </div>
                     {this.props.product.searchedProduct
                         ?
-                        <div className='container bg-white'>
+                        <div className='container  mt-2'>
                             <div className='row'>
-                                <div>Search:</div>
-                                <div className='ml-4 btn btn-outline-info p-0 pr-2' onClick={()=>this.cancelSearch()}>
-                                    <div className='row align-items-center justify-content-around'>
-                                        <div className='col-4 mr-2'>
+                                <div className='greyColor font-weight-light fontSizeSmall align-items-center pt-1'>Search results &nbsp;&nbsp;></div>
+                                <div className='ml-2 btn selectItemButton p-0 pr-2' onClick={()=>this.cancelSearch()}>
+                                    <div className='row pl-2 align-items-center justify-content-start'>
+                                        <div className='col-1 font-weight-light fontSizeSmall'>
+                                            item:
+                                        </div>
+                                        <div className='col ml-1 pr-0 font-weight-light fontSizeSmall text-danger'>
                                             {this.props.product.searchedProduct}
                                         </div>
-                                        <div className='col-2'>x</div>
+                                        <div className='col p-0 greyColor'>x</div>
                                     </div>
                                 </div>
                             </div>
