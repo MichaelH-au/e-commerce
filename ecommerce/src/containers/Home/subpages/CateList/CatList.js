@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { getProducts } from "../../store/actions";
+import { changeSearchedProduct } from "../../store/actions";
 import './CatList.css'
 
 class CatList extends Component {
@@ -16,6 +17,7 @@ class CatList extends Component {
             [key]:index
         })
         this.props.getProducts('all', value)
+        this.props.changeSearchedProduct(value)
     }
     render() {
         return (
@@ -35,7 +37,7 @@ function mapStateToProps(state) {
     };
 }
 
-const actionCreator = { getProducts }
+const actionCreator = { getProducts, changeSearchedProduct }
 
 export default connect(
     mapStateToProps, actionCreator

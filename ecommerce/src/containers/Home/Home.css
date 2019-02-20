@@ -54,3 +54,8 @@
 .selectItemButton{
     border: 1px solid darkgray;
 }
+.selectItemButton:hover{
+    border: 1px solid red;
+    background-color: white;
+}
+

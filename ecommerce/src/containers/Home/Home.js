@@ -100,6 +100,11 @@ class Home extends Component {
     cancelSearch(){
         this.props.changeSearchedProduct('')
         this.props.getProducts(this.state.selectedPriceRange)
+        this.setState({
+            itemOffset:8,
+            loadFinish:false,
+            itemLoading:false,
+        })
     }
     render() {
         return (
@@ -155,10 +160,10 @@ class Home extends Component {
                                         <div className='col-1 font-weight-light fontSizeSmall'>
                                             item:
                                         </div>
-                                        <div className='col ml-1 pr-0 font-weight-light fontSizeSmall text-danger'>
+                                        <div className='col ml-1 pr-0 fontSizeSmall text-danger'>
                                             {this.props.product.searchedProduct}
                                         </div>
-                                        <div className='col p-0 greyColor'>x</div>
+                                        <div className='col-1 mr-2 greyColor'>x</div>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +174,7 @@ class Home extends Component {
                     {this.props.product.productList.length
                         ?<ItemArea data={this.props.product.productList}/>
                         :<div className='text-center'>
-                            <div className='p-5 greyColor fontSizeLarge '>Sorry cannot find result!</div>
+                            <div className='p-2 greyColor fontSizeLarge'>Sorry cannot find result!</div>
                             <img className='w-25 mb-5' src={require('../../images/Home/img-no-cartitems.png')} alt=""/>
                         </div>
                     }
