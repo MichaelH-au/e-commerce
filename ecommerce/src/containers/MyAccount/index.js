@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom'
 import './account.css'
 import UserInfo from './subpages/MyInfo'
 import OrderList from './subpages/OrderList'
@@ -19,8 +20,10 @@ class MyAccount extends Component {
         })
     }
     render() {
+        console.log(this.props.user)
         return (
             <div className='home minHeight'>
+                {!this.props.user.isAuth ? <Redirect to='/'></Redirect>:null}
                 <div className='container pt-3'>
                     <div className='row justify-content-center'>
                         <div className="col-2    align-items-start ml-5 flexColumn greyColor">
