@@ -28,6 +28,9 @@ router.get('/userInfo', function(req, res, next) {
 router.post('/update/password', function(req, res, next) {
     userController.updatePassword(req,res)
 })
+router.get('/validUsername', function(req, res, next) {
+    userController.validUsername(req,res)
+})
 
 /**
  * router with user'cart

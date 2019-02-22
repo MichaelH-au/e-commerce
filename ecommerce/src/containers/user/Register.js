@@ -63,7 +63,24 @@ class Register extends Component {
 
 
     }
+    ValidUserName(username){
+        axios.get('/api/users/validUsername', {params:{username}})
+            .then(res => {
+                if (!res.data.valid) {
+                    this.setState({errorMsg:'username had been registered'})
+                } else {
+                    this.setState({errorMsg:''})
+                }
+            }).catch(error => {
+                console.log(error)
+        })
+    }
     handleChange(key, e) {
+        if(key === 'username') {
+            if (e.target.value) {
+                this.ValidUserName(e.target.value)
+            }
+        }
         this.setState({
             [key]: e.target.value
         })

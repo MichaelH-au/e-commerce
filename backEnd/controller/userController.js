@@ -317,5 +317,21 @@ module.exports = {
         }).catch(error=>{
             res.json({error})
         })
+    },
+    validUsername(req, res) {
+        console.log(req.query)
+        models.user.findOne({
+            where:{
+                userName:req.query.username
+            }
+        }).then(value => {
+            if (value) {
+                res.json({valid:false})
+            } else {
+                res.json({valid:true})
+            }
+        }).catch(error => {
+            res.json({error})
+        })
     }
 }

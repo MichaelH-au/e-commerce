@@ -20,6 +20,7 @@ import OrderCompleted from './containers/OrderCompleted/OrderCompleted'
 import Footer from './components/Footer/Footer'
 import AuthRoute from './containers/AuthRoute'
 import Account from './containers/MyAccount'
+import MyShop from './containers/MyShop'
 
 ReactDOM.render(
     <Provider store={store}>
@@ -37,6 +38,7 @@ ReactDOM.render(
                     <Route path='/orderconfirm' exact component={OrderConfirm}></Route>
                     <Route path='/ordercompleted' exact component={OrderCompleted}></Route>
                     <Route path='/account' exact component={Account}></Route>
+                    <Route path='/myShop' exact component={MyShop}></Route>
                 </Switch>
                 <Footer/>
             </div>

@@ -20,6 +20,14 @@ class Header extends Component {
                             <Link to='/account' className='text-decoration-none greyColor'>
                                 <div className='mr-3'>My Account</div>
                             </Link>
+                            {this.props.user.Role === 'shop_owner'
+                                ?
+                                <Link to='/myShop' className='text-decoration-none greyColor'>
+                                    <div className='mr-3'>My Shop</div>
+                                </Link>
+                                : null
+
+                            }
                             <Link to={'cart'} className='text-decoration-none greyColor'>
                                 <div className='cart mr-4'>
                                     <img className='cart' src={require('../../images/Header/cart.png')} alt=''/>

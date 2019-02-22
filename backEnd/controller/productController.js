@@ -25,7 +25,7 @@ module.exports = {
                 case '2':
                     priceGr = 1000;
                     priceLte = 5000
-                    break;
+                    break;logout
                 default:
                     break;
             }
