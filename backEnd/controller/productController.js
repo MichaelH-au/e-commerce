@@ -35,7 +35,7 @@ module.exports = {
                     [models.Sequelize.Op.between]: [priceGr, priceLte]
                 }
             }
-            if (category != 'All') {
+            if (category) {
                 param.where.category = category
             }
         } else if (category){

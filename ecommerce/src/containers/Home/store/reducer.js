@@ -25,7 +25,7 @@ export default (state = defaultState, action) => {
         case CHANGE_CATE:
             return {...state, category: action.data}
         case GET_PRODUCTS:
-            return {...state, productList: action.data}
+            return {...state, productList: action.data,curCategory:action.category}
         case PUSH_PRODUCT_LIST:
             return {...state, productList: [...state.productList, ...action.data]}
         case UPDATE_PRODUCT_LIST:
