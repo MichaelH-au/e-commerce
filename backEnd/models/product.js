@@ -14,6 +14,10 @@ module.exports = function (sequelize, dataType) {
         },
         category:{
             type: dataType.STRING,
+        },
+        productOwner:{
+            type:dataType.INTEGER,
+            defaultValue:0
         }
     }, {
         underscored: true
