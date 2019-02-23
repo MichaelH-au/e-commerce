@@ -337,5 +337,6 @@ module.exports = {
         }).catch(error => {
             res.json({error})
         })
-    }
+    },
+
 }

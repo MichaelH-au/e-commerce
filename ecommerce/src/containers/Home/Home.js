@@ -58,9 +58,10 @@ class Home extends Component {
                 .then(res => {
                     if (res.data.result.length < 4) {
                         if (res.data.result.length > 0){
+                            console.log(params)
                             this.props.updateProductList('push', res.data.result)
                             this.setState({
-                                loadFinish:false,
+                                loadFinish:true,
                                 itemLoading:false
                             })
                         } else {

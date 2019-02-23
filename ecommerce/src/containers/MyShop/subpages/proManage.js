@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import NewProductForm from './newProductForm'
 
 class MyComponent extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class MyComponent extends Component {
                 </div>
                 {this.state.newProduct
                     ?
-                    <div>newProduct</div>
+                    <NewProductForm/>
                     :
                     <div>product list</div>
                 }

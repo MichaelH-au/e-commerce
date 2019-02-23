@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controller/userController')
+const shopOwnerController = require('../controller/shopOwnerController')
 //Get all user's info
 router.get('/', function(req, res, next) {
     res.send({'test':'success'})
@@ -81,4 +82,14 @@ router.post('/order/create', function(req, res, next) {
 router.get('/order', function(req, res, next) {
     userController.getOrder(req,res)
 })
+
+
+/**
+ * Router with shopOwner's
+ * */
+router.post('/product/create', function(req, res, next) {
+    console.log('here')
+    shopOwnerController.AddProduct(req,res)
+})
+
 module.exports = router;
