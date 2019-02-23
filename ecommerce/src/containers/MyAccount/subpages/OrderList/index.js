@@ -2,14 +2,31 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { getOrders } from "../../../user/store/actions";
 import ConfirmList from '../../../../components/confirmList/index'
+import OrderDetail from '../orderDetail'
 
 class OrderList  extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showDetail:false,
+            itemDetail:null
+        }
+    }
+
     componentDidMount(){
         this.props.getOrders()
+    }
+    orderDetail(info){
+        this.setState({
+            itemDetail:info,
+            showDetail:true
+        })
     }
     render() {
         return (
             <React.Fragment>
+                {!this.state.showDetail
+                ?<React.Fragment>
                 <div className='p-4'>
                     <div className='font-weight-bold'>My Order</div>
                     <hr/>
@@ -23,17 +40,21 @@ class OrderList  extends Component {
                 </div>
                 <div className='pl-4 pr-4'>
                     {this.props.user.orderList.map((order,index)=>(
-                        <div key={index} className='mb-3'>
+                        <div key={index} className='mb-3 cursor' onClick={() => this.orderDetail(order)}>
                             <div className='row text-center fontSizeSmall w-100 cartTitle p-2'>
                                 <div className="col-4 p-0">Order number: {order.orderId}</div>
                                 <div className="col-4 p-0">{order.created_at.substring(0,19)}</div>
                                 <div className="col-2 p-0">Status: {order.status}</div>
                                 <div className="col-2 p-0 text-danger">Total Amount: ${order.orderAmount}</div>
                             </div>
-                            <ConfirmList data={order.orderInfo}/>
+                            <ConfirmList data={order.orderInfo} />
                         </div>
                     ))}
                 </div>
+                    </React.Fragment>
+                    :
+                    <OrderDetail data={this.state.itemDetail}/>
+                }
             </React.Fragment>
         );
     }

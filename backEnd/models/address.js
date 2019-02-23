@@ -30,6 +30,7 @@ module.exports = function (sequelize, dataType) {
     });
     address.associate = (models) => {
         address.belongsTo(models.user, {foreignKey: 'userInfo'});
+        address.hasMany(models.order, {foreignKey: 'userInfo'});
     };
     return address;
 };

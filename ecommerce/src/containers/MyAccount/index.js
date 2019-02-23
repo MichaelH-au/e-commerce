@@ -11,7 +11,8 @@ class MyAccount extends Component {
         super(props)
         this.state = {
             infoList:['Info', 'Orders','Change password'],
-            listIndex:0
+            listIndex:0,
+            showOrderDetail:false
         }
     }
     handlerChanges(key, value) {

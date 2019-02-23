@@ -289,10 +289,15 @@ module.exports = {
         models.order.findAll({
             where:{
                 orderOwner:userId
+            },
+            include: {
+                model: models.address,
+                attributes: ['contactName', 'address', 'phoneNumber', 'postCode'],
             }
         }).then(value => {
             res.json({data:value})
         }).catch(error=>{
+            console.log(error)
             res.json({error})
         })
     },
@@ -319,7 +324,6 @@ module.exports = {
         })
     },
     validUsername(req, res) {
-        console.log(req.query)
         models.user.findOne({
             where:{
                 userName:req.query.username

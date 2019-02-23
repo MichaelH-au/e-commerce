@@ -31,6 +31,7 @@ module.exports = function (sequelize, dataType) {
     });
     order.associate = (models) => {
         order.belongsTo(models.user, {foreignKey: 'orderOwner'});
+        order.belongsTo(models.address, {foreignKey: 'addressInfo'});
     };
     return order;
 };
