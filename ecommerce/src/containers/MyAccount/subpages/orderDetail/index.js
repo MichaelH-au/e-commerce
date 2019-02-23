@@ -29,6 +29,10 @@ class Index extends Component {
                         <div className="col-2">Subtotal</div>
                     </div>
                     <ConfirmList data={order.orderInfo}/>
+                    <div className='row justify-content-end mt-2'>
+                        <div className="col-2 p-0  fontSizeLarge font-weight-bold">Total Amount: </div>
+                        <div className="col-2 p-0 text-danger fontSizeLarge font-weight-bold"> ${order.orderAmount}</div>
+                    </div>
                 </div>
             </div>
         );
