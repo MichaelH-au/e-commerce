@@ -45,12 +45,13 @@ class OrderList  extends Component {
                 </div>
                 <div className='pl-4 pr-4'>
                     {this.props.user.orderList.map((order,index)=>(
-                        <div key={index} className='mb-3 cursor' onClick={() => this.orderDetail(order)}>
+                        <div key={index} className='mb-3' >
                             <div className='row text-center fontSizeSmall w-100 cartTitle p-2'>
-                                <div className="col-4 p-0">Order number: {order.orderId}</div>
-                                <div className="col-4 p-0">{order.created_at.substring(0,19)}</div>
+                                <div className="col-3 p-0">Order number: {order.orderId}</div>
+                                <div className="col-3 p-0">{order.created_at.substring(0,19)}</div>
                                 <div className="col-2 p-0">Status: {order.status}</div>
                                 <div className="col-2 p-0 text-danger">Total Amount: ${order.orderAmount}</div>
+                                <div className="col-2 p-0 text-info cursor" onClick={() => this.orderDetail(order)}>Details></div>
                             </div>
                             <ConfirmList data={order.orderInfo} />
                         </div>
