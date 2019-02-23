@@ -22,6 +22,11 @@ class OrderList  extends Component {
             showDetail:true
         })
     }
+    showAllList(){
+        this.setState({
+            showDetail:false
+        })
+    }
     render() {
         return (
             <React.Fragment>
@@ -53,7 +58,7 @@ class OrderList  extends Component {
                 </div>
                     </React.Fragment>
                     :
-                    <OrderDetail data={this.state.itemDetail}/>
+                    <OrderDetail data={this.state.itemDetail} goBack={this.showAllList.bind(this)}/>
                 }
             </React.Fragment>
         );

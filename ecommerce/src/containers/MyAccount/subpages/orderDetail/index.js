@@ -7,7 +7,11 @@ class Index extends Component {
         console.log(order)
         return (
             <div>
-                <div className='greyColor fontSizeLarge font-weight-bold mb-3 mt-3 p-0'>Order Detail </div>
+
+                <div className='greyColor fontSizeLarge font-weight-bold mb-3 mt-3 p-0 row justify-content-start'>
+                    <div className='col-11'>Order Detail </div>
+                    <img src={require('../../../../images/util/back.png')} className='deleteIcon' alt="" onClick={() => this.props.goBack()}/>
+                </div>
                 <div className='row mb-2'>
                     <div className='col'>Order Number: {order.orderId}</div>
                     <div className='col'>Create Time: {order.created_at.substring(0,19)}</div>
