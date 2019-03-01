@@ -11,7 +11,11 @@ import CateList from './subpages/CateList/CatList'
 import Carousel from '../../components/Carousel/Carousel'
 import Advertise from './subpages/Advertisement/Advertise'
 import ItemArea from '../../components/ItemArea/ItemArea'
-//my conflict master confilete
+//my conflict master confilete new master
+
+
+
+//master
 
 class Home extends Component {
     constructor(props){
