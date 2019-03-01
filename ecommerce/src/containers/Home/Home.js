@@ -13,10 +13,7 @@ import Advertise from './subpages/Advertisement/Advertise'
 import ItemArea from '../../components/ItemArea/ItemArea'
 //my conflict master confilete new master
 
-
-
-//master
-
+//my own code
 class Home extends Component {
     constructor(props){
         super(props)
