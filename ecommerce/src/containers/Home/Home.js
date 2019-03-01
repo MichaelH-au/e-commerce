@@ -11,6 +11,7 @@ import CateList from './subpages/CateList/CatList'
 import Carousel from '../../components/Carousel/Carousel'
 import Advertise from './subpages/Advertisement/Advertise'
 import ItemArea from '../../components/ItemArea/ItemArea'
+//my conflict
 
 class Home extends Component {
     constructor(props){
