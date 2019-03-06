@@ -139,16 +139,9 @@ class Cart extends Component {
                     </div>
                 ))}
                 <div className='row text-center mt-5 cartTitle text-white align-items-center w-100 p-0'>
-                    <div className="col-6 greyColor text-left">
-                        {!this.state.selectAll
-                            ?
-                            <img className='checkBox border-dark'
-                                 onClick={() => this.selectAll()}  src={require('../../images/Cart/check-box-blank.png')} alt=""/>
-                            :
-                            <img className='checkBox bg-white'
-                                 onClick={() => this.selectAll()} src={require('../../images/Cart/check_box.png')} alt=""/>
-                        }
-                        Select All
+                    <div className="col-6 greyColor text-left d-block checkBoxTmp pl-5">
+                        <input onChange={()=>this.selectAll()} type="checkbox" id='cart-selectAll' hidden/>
+                        <label className='m-0' htmlFor="cart-selectAll">Select All</label>
                     </div>
                     <div className="col-2 greyColor text-right">Total: </div>
                     <div className="col-2 font-weight-bold text-danger fontSizeLarge text-left">${this.state.cartList.reduce((sum,item)=>{
